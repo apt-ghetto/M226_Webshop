@@ -1,4 +1,5 @@
-﻿using Schoeppli.Model;
+﻿using Schoeppli.Controller;
+using Schoeppli.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,12 @@ namespace Schoeppli
     {
         static void Main(string[] args)
         {
+            PersonController pControl = new PersonController();
 
+            pControl.InitializePeople();
+            pControl.WriteToFile();
+            pControl.ReadFromFile();
+            pControl.PrintPeople();
         }
     }
 }

@@ -8,6 +8,8 @@ namespace Schoeppli.Model
 {
     public abstract class Person
     {
+        public static string filePath = @"C:\_Database\Personen.json";
+
         public int ID { get; set; }
         public string Vorname { get; set; }
         public string Nachname { get; set; }
@@ -23,6 +25,11 @@ namespace Schoeppli.Model
             Geburtsdatum = geburtsdatum;
             Adresse = adresse;
             PLZ = plz;
+        }
+
+        public override string ToString()
+        {
+            return $"ID -> {ID}\tVorname -> {Vorname}\tNachname -> {Nachname}\n";
         }
 
     }
