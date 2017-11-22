@@ -1,4 +1,5 @@
 ﻿using Schoeppli.Controller;
+using Schoeppli.Generic;
 using Schoeppli.Model;
 using System;
 using System.Collections.Generic;
@@ -15,8 +16,8 @@ namespace Schoeppli
             PersonController pControl = new PersonController();
 
             pControl.InitializePeople();
-            pControl.WriteToFile();
-            pControl.ReadFromFile();
+            pControl.WriteData();
+            pControl.ReadData();
             pControl.PrintPeople();
         }
     }

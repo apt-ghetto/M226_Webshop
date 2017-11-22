@@ -48,6 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\PersonController.cs" />
+    <Compile Include="Generic\DataAccess.cs" />
+    <Compile Include="Interface\IDataAccess.cs" />
     <Compile Include="Model\ArtikelBestellung.cs" />
     <Compile Include="Model\Bestellung.cs" />
     <Compile Include="Model\Enumerator\Abteilung.cs" />
@@ -59,6 +61,7 @@
     <Compile Include="Model\Mitarbeiter.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\Produkt.cs" />
+    <Compile Include="Plunder\GenericSchnippsel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -67,11 +70,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interface\" />
     <Folder Include="View\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Database\PersonDatabase.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

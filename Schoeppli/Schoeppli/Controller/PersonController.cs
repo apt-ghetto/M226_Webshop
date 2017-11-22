@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using Schoeppli.Generic;
+using Schoeppli.Interface;
 using Schoeppli.Model;
 using System;
 using System.Collections.Generic;
@@ -9,10 +11,9 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.Controller
 {
-    public class PersonController
+    public class PersonController : IDataAccess
     {
-        const string filePath = @"C:\_Database\Personen.json";
-
+        //DataAccess<Person> personAccess = new DataAccess<Person>();
         List<Kunde> alleKunden;
         List<Mitarbeiter> alleMitarbeiter;
 
@@ -42,27 +43,17 @@ namespace Schoeppli.Controller
             }
         }
 
-        public void WriteToFile()
+        public void WriteData()
         {
-            using (StreamWriter file = File.CreateText(filePath))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                //serialize object directly into file stream
-                serializer.Serialize(file, alleKunden);
-            }
+            DataAccess<Kunde>.WriteToFile(alleKunden, Kunde.GetFilePath());
+            DataAccess<Mitarbeiter>.WriteToFile(alleMitarbeiter, Mitarbeiter.GetFilePath());
         }
 
-        public void ReadFromFile()
+        public void ReadData()
         {
-            alleKunden = new List<Kunde>();
-
-            using (StreamReader reader = new StreamReader(filePath))
-            {
-                string data = reader.ReadToEnd();
-                alleKunden = JsonConvert.DeserializeObject<List<Kunde>>(data);
-            }
-
-
+            alleKunden = DataAccess<Kunde>.ReadFromFile(Kunde.GetFilePath());
+            alleMitarbeiter = DataAccess<Mitarbeiter>.ReadFromFile(Mitarbeiter.GetFilePath());
         }
+
     }
 }

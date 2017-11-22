@@ -20,5 +20,11 @@ namespace Schoeppli.Model
             Lohn = lohn;
             Status = status;
         }
+
+        public static string GetFilePath()
+        {
+            return @"C:\_Database\Mitarbeiter.json";
+        }
+
     }
 }
