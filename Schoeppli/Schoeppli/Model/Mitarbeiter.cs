@@ -26,5 +26,11 @@ namespace Schoeppli.Model
             return @"C:\_Database\Mitarbeiter.json";
         }
 
+        public override string GetInfoAll()
+        {
+            string info = base.GetInfoAll();
+            return info + $", Abteilung: {Abteilung}, Lohn: {Lohn}, Status: {Status}";
+        }
+
     }
 }
