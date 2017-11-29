@@ -13,5 +13,6 @@ namespace Schoeppli.Model.Enumerator
         Getränke,
         Alkohol,
         Verhütungsmittel,
+        Garten,
     }
 }

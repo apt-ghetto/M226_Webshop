@@ -29,5 +29,15 @@ namespace Schoeppli.Model
             MinAnzahl = minAnzahl;
             MaxAnzahl = maxAnzahl;
         }
+
+        public static string GetFilePath()
+        {
+            return @"C:\_Database\Produkte.json";
+        }
+
+        public override string ToString()
+        {
+            return $"ID: {ID}\tBeschreibung: {Beschreibung}\tBestand: {Bestand}\n";
+        }
     }
 }
