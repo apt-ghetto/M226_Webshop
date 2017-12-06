@@ -17,6 +17,12 @@ namespace Schoeppli.Controller
         List<Kunde> alleKunden;
         List<Mitarbeiter> alleMitarbeiter;
 
+
+        public PersonController()
+        {
+            ReadData();
+        }
+
         public void AddPerson(Kunde person)
         {
             alleKunden.Add(person);

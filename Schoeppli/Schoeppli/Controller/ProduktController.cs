@@ -10,9 +10,14 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.Controller
 {
-    class ProduktController : IDataAccess
+    public class ProduktController : IDataAccess
     {
         List<Produkt> alleProdukte;
+
+        public ProduktController()
+        {
+            ReadData();
+        }
 
         // Only for creating test data
         public void InitialiseProducts()

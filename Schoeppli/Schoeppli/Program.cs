@@ -1,6 +1,7 @@
 ﻿using Schoeppli.Controller;
 using Schoeppli.Generic;
 using Schoeppli.Model;
+using Schoeppli.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,17 @@ namespace Schoeppli
     {
         static void Main(string[] args)
         {
-            PersonController pControl = new PersonController();
-            ProduktController pkc = new ProduktController();
+            MainView view = new MainView();
+            view.MainMenu();
 
+
+
+
+
+
+
+
+            /*
             pControl.InitializePeople();
             pControl.WriteData();
             pControl.ReadData();
@@ -29,7 +38,7 @@ namespace Schoeppli
             Console.WriteLine("########################################");
             pkc.PrintProdukte();
             Console.WriteLine("########################################");
-
+            */
         }
     }
 }

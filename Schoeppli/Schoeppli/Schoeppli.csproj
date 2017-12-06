@@ -51,6 +51,8 @@
     <Compile Include="Controller\ProduktController.cs" />
     <Compile Include="Generic\DataAccess.cs" />
     <Compile Include="Interface\IDataAccess.cs" />
+    <Compile Include="Interface\IModel.cs" />
+    <Compile Include="Interface\IView.cs" />
     <Compile Include="Model\ArtikelBestellung.cs" />
     <Compile Include="Model\Bestellung.cs" />
     <Compile Include="Model\Enumerator\Abteilung.cs" />
@@ -65,14 +67,18 @@
     <Compile Include="Plunder\GenericSchnippsel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\ConsoleUtils.cs" />
+    <Compile Include="View\MainView.cs" />
+    <Compile Include="View\ProduktView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Plunder\Testdaten\Kunden.json" />
+    <None Include="Plunder\Testdaten\Mitarbeiter.json" />
+    <None Include="Plunder\Testdaten\Produkte.json" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
