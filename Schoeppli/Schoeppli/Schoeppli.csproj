@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\PersonController.cs" />
+    <Compile Include="Controller\ProduktController.cs" />
     <Compile Include="Generic\DataAccess.cs" />
     <Compile Include="Interface\IDataAccess.cs" />
     <Compile Include="Model\ArtikelBestellung.cs" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Schoeppli.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.Model
 {
-    public abstract class Person
+    public abstract class Person : IModel
     {
         public int ID { get; set; }
         public string Vorname { get; set; }
@@ -30,5 +31,9 @@ namespace Schoeppli.Model
             return $"ID: {ID}\tVorname: {Vorname}\tNachname: {Nachname}\n";
         }
 
+        public virtual string GetInfoAll()
+        {
+            return $"ID: {ID}, Vorname: {Vorname}, Nachname: {Nachname}, Geburtsdatum: {Geburtsdatum}, Adresse: {Adresse}, PLZ: {PLZ}";
+        }
     }
 }

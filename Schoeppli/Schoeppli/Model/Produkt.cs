@@ -1,4 +1,5 @@
-﻿using Schoeppli.Model.Enumerator;
+﻿using Schoeppli.Interface;
+using Schoeppli.Model.Enumerator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.Model
 {
-    public class Produkt
+    public class Produkt : IModel
     {        
         public int ID { get; set; }
         public string Beschreibung { get; set; }
@@ -28,6 +29,21 @@ namespace Schoeppli.Model
             Bestand = bestand;
             MinAnzahl = minAnzahl;
             MaxAnzahl = maxAnzahl;
+        }
+
+        public static string GetFilePath()
+        {
+            return @"C:\_Database\Produkte.json";
+        }
+
+        public override string ToString()
+        {
+            return $"ID: {ID}\tBeschreibung: {Beschreibung}\tBestand: {Bestand}\n";
+        }
+
+        public string GetInfoAll()
+        {
+            return $"ID: {ID}, Beschreibung: {Beschreibung}, Kategorie: {Kategorie}, Preis: {Preis}, Lagerplatz: {Lagerplatz}, Bestand: {Bestand}, MinAnzahl: {MinAnzahl}, MaxAnzahl: {MaxAnzahl}";
         }
     }
 }
