@@ -14,14 +14,21 @@ namespace Schoeppli.View
         }
 
 
-        public static void PrintUserInput()
+        public static void PrintPrompt()
         {
             Console.Write("SchöppliShell::> ");
         }
 
         public static void PrintInvalidMessage()
         {
-            Console.WriteLine("Heeeeeeeeeee, aso bitte. Hesch ja sogar en Uswahl");
+            Console.WriteLine("Ungültige Eingabe.");
         }
+
+        public static void PrintContinueMessage()
+        {
+            Console.Write("Beliebige Taste drücken...");
+        }
+
+
     }
 }

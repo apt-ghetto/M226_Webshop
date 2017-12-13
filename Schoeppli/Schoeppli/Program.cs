@@ -15,7 +15,7 @@ namespace Schoeppli
         static void Main(string[] args)
         {
             MainView view = new MainView();
-            view.MainMenu();
+            view.ShowView();
 
 
 

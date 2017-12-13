@@ -1,5 +1,7 @@
 ﻿using Schoeppli.Controller;
 using Schoeppli.Interface;
+using Schoeppli.Model;
+using Schoeppli.Model.Enumerator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,16 +27,16 @@ namespace Schoeppli.View
                 Console.Clear();
                 ConsoleUtils.PrintTitle();
                 ShowMenu();
-                ConsoleUtils.PrintUserInput();
+                ConsoleUtils.PrintPrompt();
                 if (byte.TryParse(Console.ReadLine(), out input))
                 {
                     switch (input)
                     {
                         case 1:
-
+                            ShowAllProducts(controller.GetAllProducts());
                             break;
                         case 2:
-
+                            NewProduct();
                             break;
                         case 3:
                             break;
@@ -45,10 +47,10 @@ namespace Schoeppli.View
 
                             break;
                         case 9:
-                            
+
                             break;
                         default:
-                            Console.WriteLine("Heitere Fahne.");
+                            ConsoleUtils.PrintInvalidMessage();
                             break;
                     }
                 }
@@ -61,14 +63,68 @@ namespace Schoeppli.View
 
         public void ShowMenu()
         {
-            Console.WriteLine("1) Neues Produkt erstellen");
-            Console.WriteLine("2) ");
-            Console.WriteLine("3) ");
-            Console.WriteLine("4) ");
-            Console.WriteLine("5) ");
+            Console.WriteLine("1) Alle Produkte anzeigen");
+            Console.WriteLine("2) Neues Produkt erstellen");
+            Console.WriteLine("3) Produkt bearbeiten");
+            Console.WriteLine("4) Produkt löschen");
             Console.WriteLine();
             Console.WriteLine("9) Zurück");
             Console.WriteLine();
+        }
+
+        private void ShowAllProducts(List<Produkt> produkte)
+        {
+            Console.Clear();
+            ConsoleUtils.PrintTitle();
+            produkte.ForEach(Console.WriteLine);
+            Console.WriteLine();
+            ConsoleUtils.PrintContinueMessage();
+            Console.ReadKey();
+        }
+
+        private void NewProduct()
+        {
+            Produkt neuesProdukt = new Produkt();
+
+            Console.Clear();
+            ConsoleUtils.PrintTitle();
+
+            Console.Write("Beschreibung: ");
+            neuesProdukt.Beschreibung = Console.ReadLine();
+            Console.WriteLine();
+
+            neuesProdukt.Kategorie = ChooseCategory();
+            Console.Write("Kategorie: ");
+            neuesProdukt.Beschreibung = Console.ReadLine();
+            Console.Write("Beschreibung: ");
+            neuesProdukt.Beschreibung = Console.ReadLine();
+            Console.Write("Beschreibung: ");
+            neuesProdukt.Beschreibung = Console.ReadLine();
+        }
+
+        private Kategorie ChooseCategory()
+        {
+            foreach (var cat in Enum.GetValues(typeof(Kategorie)))
+            {
+                Console.WriteLine($"{(int)cat}) {cat}");
+            }
+            Console.Write("Kategorie #: ");
+
+            do
+            {
+                int userCat;
+
+                if (Int32.TryParse(Console.ReadLine(), out userCat))
+                {
+                    if (userCat >= 0 && userCat < Enum.GetNames(typeof(Kategorie)).Length)
+                    {
+                        return (Kategorie)userCat;
+                    }
+                }
+
+                ConsoleUtils.PrintInvalidMessage();
+            } while (true);
+            
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Schoeppli.View
                 Console.Clear();
                 ConsoleUtils.PrintTitle();
                 ShowMenu();
-                ConsoleUtils.PrintUserInput();
+                ConsoleUtils.PrintPrompt();
                 if (byte.TryParse(Console.ReadLine(), out input))
                 {
                     switch (input)
@@ -52,7 +52,7 @@ namespace Schoeppli.View
 
                             break;
                         default:
-                            Console.WriteLine("Heitere Fahne.");
+                            ConsoleUtils.PrintInvalidMessage();
                             break;
                     }
                 }

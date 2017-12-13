@@ -25,20 +25,12 @@ namespace Schoeppli.Controller
             alleProdukte = new List<Produkt>();
             Produkt produkt = new Produkt(1, "Gigigampfi",
                 Kategorie.Garten, 800000,
-                Lagerplatz.D, 12, 0, 5);
+                12, 0, 5);
             alleProdukte.Add(produkt);
             produkt = new Produkt(2, "Absinth 1L", Kategorie.Alkohol,
-                2400, Lagerplatz.A, 18, 5, 120);
+                2400, 18, 5, 120);
             alleProdukte.Add(produkt);
 
-        }
-
-        public void PrintProdukte()
-        {
-            foreach(Produkt p in alleProdukte)
-            {
-                Console.WriteLine(p.ToString());
-            }
         }
 
         public void WriteData()
@@ -49,6 +41,11 @@ namespace Schoeppli.Controller
         public void ReadData()
         {
             alleProdukte = DataAccess<Produkt>.ReadFromFile(Produkt.GetFilePath());
+        }
+
+        public List<Produkt> GetAllProducts()
+        {
+            return alleProdukte;
         }
     }
 }

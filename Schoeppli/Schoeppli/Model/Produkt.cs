@@ -14,18 +14,21 @@ namespace Schoeppli.Model
         public string Beschreibung { get; set; }
         public Kategorie Kategorie { get; set; }
         public int Preis { get; set; }
-        public Lagerplatz Lagerplatz { get; set; }
         public int Bestand { get; set; }
         public int MinAnzahl { get; set; }
         public int MaxAnzahl { get; set; }
 
-        public Produkt(int id, string beschreibung, Kategorie kategorie, int preis, Lagerplatz lagerplatz, int bestand, int minAnzahl, int maxAnzahl)
+        public Produkt()
+        {
+
+        }
+
+        public Produkt(int id, string beschreibung, Kategorie kategorie, int preis, int bestand, int minAnzahl, int maxAnzahl)
         {
             ID = id;
             Beschreibung = beschreibung;
             Kategorie = kategorie;
             Preis = preis;
-            Lagerplatz = lagerplatz;
             Bestand = bestand;
             MinAnzahl = minAnzahl;
             MaxAnzahl = maxAnzahl;
@@ -43,7 +46,7 @@ namespace Schoeppli.Model
 
         public string GetInfoAll()
         {
-            return $"ID: {ID}, Beschreibung: {Beschreibung}, Kategorie: {Kategorie}, Preis: {Preis}, Lagerplatz: {Lagerplatz}, Bestand: {Bestand}, MinAnzahl: {MinAnzahl}, MaxAnzahl: {MaxAnzahl}";
+            return $"ID: {ID}, Beschreibung: {Beschreibung}, Kategorie: {Kategorie}, Preis: {Preis}, Bestand: {Bestand}, MinAnzahl: {MinAnzahl}, MaxAnzahl: {MaxAnzahl}";
         }
     }
 }

@@ -58,7 +58,6 @@
     <Compile Include="Model\Enumerator\Abteilung.cs" />
     <Compile Include="Model\Enumerator\Bestellstatus.cs" />
     <Compile Include="Model\Enumerator\Kategorie.cs" />
-    <Compile Include="Model\Enumerator\Lagerplatz.cs" />
     <Compile Include="Model\Enumerator\Status.cs" />
     <Compile Include="Model\Kunde.cs" />
     <Compile Include="Model\Mitarbeiter.cs" />
@@ -78,7 +77,9 @@
     <None Include="Plunder\Testdaten\Mitarbeiter.json" />
     <None Include="Plunder\Testdaten\Produkte.json" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Plunder\Pro_Memoria.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
