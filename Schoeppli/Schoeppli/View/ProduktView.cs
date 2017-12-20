@@ -34,11 +34,15 @@ namespace Schoeppli.View
                     {
                         case 1:
                             ShowAllProducts(controller.GetAllProducts());
+                            ConsoleUtils.PrintContinueMessage();
+                            Console.ReadKey();
                             break;
                         case 2:
                             NewProduct();
                             break;
                         case 3:
+                            ShowAllProducts(controller.GetAllProducts());
+                            EditProduct(GetUserInputAsInt("Welches Produkt soll bearbeitet werden? [ID]"));
                             break;
                         case 4:
 
@@ -78,8 +82,6 @@ namespace Schoeppli.View
             ConsoleUtils.PrintTitle();
             produkte.ForEach(Console.WriteLine);
             Console.WriteLine();
-            ConsoleUtils.PrintContinueMessage();
-            Console.ReadKey();
         }
 
         private void NewProduct()
@@ -94,12 +96,87 @@ namespace Schoeppli.View
             Console.WriteLine();
 
             neuesProdukt.Kategorie = ChooseCategory();
-            Console.Write("Kategorie: ");
-            neuesProdukt.Beschreibung = Console.ReadLine();
-            Console.Write("Beschreibung: ");
-            neuesProdukt.Beschreibung = Console.ReadLine();
-            Console.Write("Beschreibung: ");
-            neuesProdukt.Beschreibung = Console.ReadLine();
+            Console.WriteLine();
+
+            neuesProdukt.Preis = GetUserInputAsInt("Preis in Rappen: ");
+            Console.WriteLine();
+
+            neuesProdukt.Bestand = GetUserInputAsInt("Bestand: ");
+            Console.WriteLine();
+
+            neuesProdukt.MinAnzahl = GetUserInputAsInt("Min. Anzahl: ");
+            Console.WriteLine();
+
+            neuesProdukt.MaxAnzahl = GetUserInputAsInt("Max. Anzahl: ");
+            Console.WriteLine();
+
+            Console.WriteLine(neuesProdukt.GetInfoAll());
+            Console.WriteLine();
+            Console.WriteLine("Möchten sie dieses Produkt speichern? y/n");
+            ConsoleUtils.PrintPrompt();
+            if (Console.ReadLine() == "y")
+            {
+                controller.SaveNewProduct(neuesProdukt);
+            }
+        }
+
+        private void EditProduct(int productID)
+        {
+            Console.Clear();
+            ConsoleUtils.PrintTitle();
+
+            Produkt bearbeitetesProdukt = controller.GetAllProducts().Where(x => x.ID == productID).SingleOrDefault();
+            if (bearbeitetesProdukt != null)
+            {
+                do
+                {
+
+                Console.WriteLine("1) Beschreibung");
+                Console.WriteLine("2) Kategorie");
+                Console.WriteLine("3) Preis");
+                Console.WriteLine("4) Bestand");
+                Console.WriteLine("5) Min. Anzahl");
+                Console.WriteLine("6) Max. Anzahl");
+                Console.WriteLine();
+                Console.WriteLine("Welche Eigenschaft soll bearbeitet werden?");
+                ConsoleUtils.PrintPrompt();
+                string userInput = Console.ReadLine();
+
+                switch (userInput)
+                {
+                    case "1":
+                        Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.Beschreibung}");
+                        Console.Write("Neuer Wert: ");
+                        bearbeitetesProdukt.Beschreibung = Console.ReadLine();
+                        break;
+                    case "2":
+                        Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.Kategorie}");
+                        break;
+                    case "3":
+                        Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.Preis}");
+                        break;
+                    case "4":
+                        Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.Bestand}");
+                        break;
+                    case "5":
+                        Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.MinAnzahl}");
+                        break;
+                    case "6":
+                        Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.MaxAnzahl}");
+                        break;
+                    default:
+                        break;
+                }
+                } while (userInput != 9);
+
+            }
+            else
+            {
+                Console.WriteLine("Produkt existiert nicht");
+                ConsoleUtils.PrintContinueMessage();
+                Console.ReadKey();
+                ShowView();
+            }
         }
 
         private Kategorie ChooseCategory()
@@ -108,11 +185,12 @@ namespace Schoeppli.View
             {
                 Console.WriteLine($"{(int)cat}) {cat}");
             }
-            Console.Write("Kategorie #: ");
 
             do
             {
                 int userCat;
+
+                Console.Write("Kategorie #: ");
 
                 if (Int32.TryParse(Console.ReadLine(), out userCat))
                 {
@@ -123,8 +201,27 @@ namespace Schoeppli.View
                 }
 
                 ConsoleUtils.PrintInvalidMessage();
+            } while (true);            
+        }
+
+        private int GetUserInputAsInt(string userText)
+        {
+            int number;
+
+            do
+            {
+                Console.WriteLine(userText);
+                ConsoleUtils.PrintPrompt();
+
+                if (Int32.TryParse(Console.ReadLine(), out number))
+                {
+                    return number;
+                }
+                else
+                {
+                    ConsoleUtils.PrintInvalidMessage();
+                }
             } while (true);
-            
         }
     }
 }

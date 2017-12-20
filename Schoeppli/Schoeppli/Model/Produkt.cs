@@ -46,7 +46,7 @@ namespace Schoeppli.Model
 
         public string GetInfoAll()
         {
-            return $"ID: {ID}, Beschreibung: {Beschreibung}, Kategorie: {Kategorie}, Preis: {Preis}, Bestand: {Bestand}, MinAnzahl: {MinAnzahl}, MaxAnzahl: {MaxAnzahl}";
+            return $"Beschreibung: {Beschreibung}, Kategorie: {Kategorie}, Preis: {Preis}, Bestand: {Bestand}, MinAnzahl: {MinAnzahl}, MaxAnzahl: {MaxAnzahl}";
         }
     }
 }

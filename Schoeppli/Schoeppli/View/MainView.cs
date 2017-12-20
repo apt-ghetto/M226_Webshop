@@ -49,7 +49,8 @@ namespace Schoeppli.View
 
                             break;
                         case 9:
-
+                            personenCtrl.WriteData();
+                            produktCtrl.WriteData();
                             break;
                         default:
                             ConsoleUtils.PrintInvalidMessage();

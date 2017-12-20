@@ -47,5 +47,12 @@ namespace Schoeppli.Controller
         {
             return alleProdukte;
         }
+
+        public void SaveNewProduct(Produkt nigelnagelneuesProdukt)
+        {
+            nigelnagelneuesProdukt.ID = alleProdukte[alleProdukte.Count - 1].ID + 1;
+
+            alleProdukte.Add(nigelnagelneuesProdukt);
+        }
     }
 }
