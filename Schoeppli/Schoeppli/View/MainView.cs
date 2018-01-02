@@ -33,7 +33,8 @@ namespace Schoeppli.View
                     switch (input)
                     {
                         case 1:
-
+                            MitarbeiterView mitarbeiterView = new MitarbeiterView(personenCtrl);
+                            mitarbeiterView.ShowView();
                             break;
                         case 2:
 

@@ -246,22 +246,7 @@ namespace Schoeppli.View
 
         private int GetUserInputAsInt(string userText)
         {
-            int number;
-
-            do
-            {
-                Console.WriteLine(userText);
-                ConsoleUtils.PrintPrompt();
-
-                if (Int32.TryParse(Console.ReadLine(), out number))
-                {
-                    return number;
-                }
-                else
-                {
-                    ConsoleUtils.PrintInvalidMessage();
-                }
-            } while (true);
+            return ConsoleUtils.GetUserInputAsInt(userText);
         }
     }
 }

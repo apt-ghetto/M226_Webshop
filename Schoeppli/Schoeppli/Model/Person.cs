@@ -33,7 +33,7 @@ namespace Schoeppli.Model
 
         public virtual string GetInfoAll()
         {
-            return $"ID: {ID}, Vorname: {Vorname}, Nachname: {Nachname}, Geburtsdatum: {Geburtsdatum}, Adresse: {Adresse}, PLZ: {PLZ}";
+            return $"Vorname: {Vorname}, Nachname: {Nachname}, Geburtsdatum: {Geburtsdatum}, Adresse: {Adresse}, PLZ: {PLZ}";
         }
     }
 }
