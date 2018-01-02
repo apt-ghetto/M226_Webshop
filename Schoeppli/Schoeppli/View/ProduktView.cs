@@ -45,7 +45,8 @@ namespace Schoeppli.View
                             EditProduct(GetUserInputAsInt("Welches Produkt soll bearbeitet werden? [ID]"));
                             break;
                         case 4:
-
+                            ShowAllProducts(controller.GetAllProducts());
+                            DeleteProduct(GetUserInputAsInt("Welches Produkt soll gelöscht werden? [ID]"));
                             break;
                         case 5:
 
@@ -125,49 +126,66 @@ namespace Schoeppli.View
             Console.Clear();
             ConsoleUtils.PrintTitle();
 
-            Produkt bearbeitetesProdukt = controller.GetAllProducts().Where(x => x.ID == productID).SingleOrDefault();
-            if (bearbeitetesProdukt != null)
+            Produkt originalProdukt = controller.GetAllProducts().Where(x => x.ID == productID).SingleOrDefault();
+
+            if (originalProdukt != null)
             {
+                Produkt bearbeitetesProdukt = new Produkt(originalProdukt.ID, originalProdukt.Beschreibung,
+                    originalProdukt.Kategorie, originalProdukt.Preis, originalProdukt.Bestand, originalProdukt.MinAnzahl, originalProdukt.MaxAnzahl);
+                string userInput;
+
                 do
                 {
+                    Console.WriteLine("1) Beschreibung");
+                    Console.WriteLine("2) Kategorie");
+                    Console.WriteLine("3) Preis");
+                    Console.WriteLine("4) Bestand");
+                    Console.WriteLine("5) Min. Anzahl");
+                    Console.WriteLine("6) Max. Anzahl");
+                    Console.WriteLine();
+                    Console.WriteLine("8) Speichern");
+                    Console.WriteLine();
+                    Console.WriteLine("9) Zurück");
+                    Console.WriteLine();
+                    Console.WriteLine("Welche Eigenschaft soll bearbeitet werden?");
+                    ConsoleUtils.PrintPrompt();
+                    userInput = Console.ReadLine();
 
-                Console.WriteLine("1) Beschreibung");
-                Console.WriteLine("2) Kategorie");
-                Console.WriteLine("3) Preis");
-                Console.WriteLine("4) Bestand");
-                Console.WriteLine("5) Min. Anzahl");
-                Console.WriteLine("6) Max. Anzahl");
-                Console.WriteLine();
-                Console.WriteLine("Welche Eigenschaft soll bearbeitet werden?");
-                ConsoleUtils.PrintPrompt();
-                string userInput = Console.ReadLine();
-
-                switch (userInput)
-                {
-                    case "1":
-                        Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.Beschreibung}");
-                        Console.Write("Neuer Wert: ");
-                        bearbeitetesProdukt.Beschreibung = Console.ReadLine();
-                        break;
-                    case "2":
-                        Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.Kategorie}");
-                        break;
-                    case "3":
-                        Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.Preis}");
-                        break;
-                    case "4":
-                        Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.Bestand}");
-                        break;
-                    case "5":
-                        Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.MinAnzahl}");
-                        break;
-                    case "6":
-                        Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.MaxAnzahl}");
-                        break;
-                    default:
-                        break;
-                }
-                } while (userInput != 9);
+                    switch (userInput)
+                    {
+                        case "1":
+                            Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.Beschreibung}");
+                            Console.Write("Neuer Wert: ");
+                            bearbeitetesProdukt.Beschreibung = Console.ReadLine();
+                            break;
+                        case "2":
+                            Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.Kategorie}");
+                            bearbeitetesProdukt.Kategorie = ChooseCategory();
+                            break;
+                        case "3":
+                            Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.Preis}");
+                            bearbeitetesProdukt.Preis = GetUserInputAsInt("Neuer Wert: ");
+                            break;
+                        case "4":
+                            Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.Bestand}");
+                            bearbeitetesProdukt.Bestand = GetUserInputAsInt("Neuer Wert: ");
+                            break;
+                        case "5":
+                            Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.MinAnzahl}");
+                            bearbeitetesProdukt.MinAnzahl = GetUserInputAsInt("Neuer Wert: ");
+                            break;
+                        case "6":
+                            Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.MaxAnzahl}");
+                            bearbeitetesProdukt.MaxAnzahl = GetUserInputAsInt("Neuer Wert: ");
+                            break;
+                        case "8":
+                            controller.GetAllProducts()[controller.GetAllProducts().FindIndex(ind => ind.ID == bearbeitetesProdukt.ID)] = bearbeitetesProdukt;
+                            break;
+                        default:
+                            break;
+                    }
+                    Console.Clear();
+                } while (userInput != "9");
 
             }
             else
@@ -175,7 +193,29 @@ namespace Schoeppli.View
                 Console.WriteLine("Produkt existiert nicht");
                 ConsoleUtils.PrintContinueMessage();
                 Console.ReadKey();
-                ShowView();
+            }
+        }
+
+        private void DeleteProduct(int id)
+        {
+            Console.Clear();
+            ConsoleUtils.PrintTitle();
+            Produkt produkt = controller.GetAllProducts().Where(x => x.ID == id).SingleOrDefault();
+
+            if (null != produkt)
+            {
+                Console.WriteLine($"Wollen Sie {produkt.GetInfoAll()} wirklich löschen? y/n");
+                ConsoleUtils.PrintPrompt();
+                if (Console.ReadLine() == "y")
+                {
+                    controller.GetAllProducts().Remove(produkt);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Produkt existiert nicht");
+                ConsoleUtils.PrintContinueMessage();
+                Console.ReadKey();
             }
         }
 

@@ -48,6 +48,8 @@ namespace Schoeppli.View
                         case 5:
 
                             break;
+                        case 8:
+                            break;
                         case 9:
                             personenCtrl.WriteData();
                             produktCtrl.WriteData();
@@ -61,7 +63,7 @@ namespace Schoeppli.View
                 {
                     ConsoleUtils.PrintInvalidMessage();
                 }
-            } while (input != 9);
+            } while (input != 9 && input != 8);
         }
 
         public void ShowMenu()
@@ -71,6 +73,8 @@ namespace Schoeppli.View
             Console.WriteLine("3) Produktverwaltung");
             Console.WriteLine("4) Bestellungen");
             Console.WriteLine("5) Rechnungswesen");
+            Console.WriteLine();
+            Console.WriteLine("8) Beenden ohne Speichern");
             Console.WriteLine();
             Console.WriteLine("9) Speichern und Beenden");
             Console.WriteLine();
