@@ -20,6 +20,8 @@ namespace Schoeppli.Controller
 
         public PersonController()
         {
+            alleKunden = new List<Kunde>();
+            alleMitarbeiter = new List<Mitarbeiter>();
             ReadData();
         }
 
@@ -63,12 +65,12 @@ namespace Schoeppli.Controller
 
         public List<Mitarbeiter> GetAllMitarbeiter()
         {
-            return alleMitarbeiter;
+            return alleMitarbeiter != null ? alleMitarbeiter : new List<Mitarbeiter>();
         }
 
         public List<Kunde> GetAllKunden()
         {
-            return alleKunden;
+            return alleKunden != null ? alleKunden : new List<Kunde>();
 
         }
 

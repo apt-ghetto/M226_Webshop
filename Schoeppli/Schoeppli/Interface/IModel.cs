@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.Interface
 {
-    interface IModel
+    public interface IModel
     {
         string GetInfoAll();
     }

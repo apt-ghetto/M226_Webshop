@@ -12,11 +12,13 @@ namespace Schoeppli.View
     {
         private PersonController personenCtrl;
         private ProduktController produktCtrl;
+        private BestellungController bestellCtrl;
 
         public MainView()
         {
             personenCtrl = new PersonController();
             produktCtrl = new ProduktController();
+            bestellCtrl = new BestellungController();
         }
 
         public void ShowView()
@@ -45,7 +47,8 @@ namespace Schoeppli.View
                             produktView.ShowView();
                             break;
                         case 4:
-
+                            BestellungView bestellungView = new BestellungView(bestellCtrl, personenCtrl);
+                            bestellungView.ShowView();
                             break;
                         case 5:
 
