@@ -70,6 +70,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\ConsoleUtils.cs" />
+    <Compile Include="View\KundenView.cs" />
     <Compile Include="View\MainView.cs" />
     <Compile Include="View\MitarbeiterView.cs" />
     <Compile Include="View\ProduktView.cs" />

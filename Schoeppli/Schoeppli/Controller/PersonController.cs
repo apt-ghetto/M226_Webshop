@@ -81,5 +81,14 @@ namespace Schoeppli.Controller
             alleMitarbeiter.Add(nigelnagelneuerMitarbeiter);
         }
 
+        public void SaveNewKunde(Kunde nigelnagelneuerKunde)
+        {
+            nigelnagelneuerKunde.ID = alleKunden.Count == 0 ?
+                1 :
+                alleKunden[alleKunden.Count - 1].ID + 1;
+
+            alleKunden.Add(nigelnagelneuerKunde);
+        }
+
     }
 }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.View
 {
-    class MitarbeiterView : ISubView<Mitarbeiter>
+    public class MitarbeiterView : ISubView<Mitarbeiter>
     {
         private PersonController controller;
 
@@ -41,6 +41,7 @@ namespace Schoeppli.View
                 ConsoleUtils.PrintTitle();
                 ShowMenu();
                 ConsoleUtils.PrintPrompt();
+
                 if (byte.TryParse(Console.ReadLine(), out input))
                 {
                     switch (input)
@@ -152,9 +153,8 @@ namespace Schoeppli.View
 
             Console.WriteLine(mitarbeiter.GetInfoAll());
             Console.WriteLine();
-            Console.WriteLine("Möchten Sie diesen Mitarbeiter speichern? y/n");
-            ConsoleUtils.PrintPrompt();
-            if(Console.ReadLine() == "y")
+            ConsoleUtils.PrintSaveTemporary();
+            if (Console.ReadLine() == "y")
             {
                 controller.SaveNewMitarbeiter(mitarbeiter);
             }
@@ -165,7 +165,7 @@ namespace Schoeppli.View
             Mitarbeiter mitarbeiter = GetMitarbeiter();
             if (null != mitarbeiter)
             {
-                Console.WriteLine($"Soll Mitarbeiter {mitarbeiter.Vorname} {mitarbeiter.Nachname} wirklich gelöscht werden? y/n");
+                Console.WriteLine($"Soll Mitarbeiter {mitarbeiter.Vorname} {mitarbeiter.Nachname} gelöscht werden? y/n");
                 ConsoleUtils.PrintPrompt();
                 if (Console.ReadLine() == "y")
                 {
@@ -260,7 +260,7 @@ namespace Schoeppli.View
         private Mitarbeiter GetMitarbeiter()
         {
             ShowAll(controller.GetAllMitarbeiter());
-            int mitarbeiterId = ConsoleUtils.GetUserInputAsInt("Von welchem Mitarbeiter? [ID]");
+            int mitarbeiterId = ConsoleUtils.GetUserInputAsInt("Welcher Mitarbeiter? [ID]");
 
             return controller.GetAllMitarbeiter().Where(x => x.ID == mitarbeiterId).SingleOrDefault();
         }

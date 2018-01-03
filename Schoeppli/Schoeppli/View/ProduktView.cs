@@ -143,7 +143,7 @@ namespace Schoeppli.View
                     Console.WriteLine("5) Min. Anzahl");
                     Console.WriteLine("6) Max. Anzahl");
                     Console.WriteLine();
-                    Console.WriteLine("8) Speichern");
+                    Console.WriteLine("8) Temporär speichern");
                     Console.WriteLine();
                     Console.WriteLine("9) Zurück");
                     Console.WriteLine();

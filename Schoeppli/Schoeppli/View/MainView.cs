@@ -37,7 +37,8 @@ namespace Schoeppli.View
                             mitarbeiterView.ShowView();
                             break;
                         case 2:
-
+                            KundenView kundenView = new KundenView(personenCtrl);
+                            kundenView.ShowView();
                             break;
                         case 3:
                             ProduktView produktView = new ProduktView(produktCtrl);
