@@ -13,7 +13,6 @@ namespace Schoeppli.Model
         public int Lohn { get; set; }
         public Status Status { get; set; }
 
-       
         public Mitarbeiter(int id, string vorname, string nachname, DateTime geburtsdatum, string adresse, string plz, Abteilung abteilung, int lohn, Status status)
             :base(id, vorname, nachname, geburtsdatum, adresse, plz)
         {
@@ -33,5 +32,9 @@ namespace Schoeppli.Model
             return info + $", Abteilung: {Abteilung}, Lohn: {Lohn}, Status: {Status}";
         }
 
+        public override string ToString()
+        {
+            return $"ID: {ID}\tVorname: {Vorname}\tNachname: {Nachname}\tAbteilung: {Abteilung}\tStatus: {Status}\n";
+        }
     }
 }

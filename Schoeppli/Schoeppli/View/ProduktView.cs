@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.View
 {
-    public class ProduktView : IView
+    public class ProduktView : ISubView<Produkt>
     {
         private ProduktController controller;
 
@@ -33,7 +33,7 @@ namespace Schoeppli.View
                     switch (input)
                     {
                         case 1:
-                            ShowAllProducts(controller.GetAllProducts());
+                            ShowAll(controller.GetAllProducts());
                             ConsoleUtils.PrintContinueMessage();
                             Console.ReadKey();
                             break;
@@ -41,11 +41,11 @@ namespace Schoeppli.View
                             NewProduct();
                             break;
                         case 3:
-                            ShowAllProducts(controller.GetAllProducts());
+                            ShowAll(controller.GetAllProducts());
                             EditProduct(GetUserInputAsInt("Welches Produkt soll bearbeitet werden? [ID]"));
                             break;
                         case 4:
-                            ShowAllProducts(controller.GetAllProducts());
+                            ShowAll(controller.GetAllProducts());
                             DeleteProduct(GetUserInputAsInt("Welches Produkt soll gelöscht werden? [ID]"));
                             break;
                         case 5:
@@ -77,7 +77,7 @@ namespace Schoeppli.View
             Console.WriteLine();
         }
 
-        private void ShowAllProducts(List<Produkt> produkte)
+        public void ShowAll(List<Produkt> produkte)
         {
             Console.Clear();
             ConsoleUtils.PrintTitle();

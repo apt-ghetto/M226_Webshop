@@ -54,6 +54,7 @@
     <Compile Include="Generic\DataAccess.cs" />
     <Compile Include="Interface\IDataAccess.cs" />
     <Compile Include="Interface\IModel.cs" />
+    <Compile Include="Interface\ISubView.cs" />
     <Compile Include="Interface\IView.cs" />
     <Compile Include="Model\ArtikelBestellung.cs" />
     <Compile Include="Model\Bestellung.cs" />

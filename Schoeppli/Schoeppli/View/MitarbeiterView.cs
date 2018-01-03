@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.View
 {
-    class MitarbeiterView : IView
+    class MitarbeiterView : ISubView<Mitarbeiter>
     {
         private PersonController controller;
 
@@ -46,18 +46,21 @@ namespace Schoeppli.View
                     switch (input)
                     {
                         case 1:
-                            ShowAllMitarbeiter(controller.GetAllMitarbeiter());
+                            ShowAll(controller.GetAllMitarbeiter());
                             ConsoleUtils.PrintContinueMessage();
                             Console.ReadKey();
                             break;
                         case 2:
+                            EditStatus();
                             break;
                         case 3:
+                            EditAbteilung();
                             break;
                         case 4:
                             NewMitarbeiter();
                             break;
                         case 5:
+                            DeleteMitarbeiter();
                             break;
                         case 9:
                             break;
@@ -73,12 +76,51 @@ namespace Schoeppli.View
             } while (input != 9);
         }
 
-        private void ShowAllMitarbeiter(List<Mitarbeiter> mitarbeiter)
+        public void ShowAll(List<Mitarbeiter> mitarbeiter)
         {
             Console.Clear();
             ConsoleUtils.PrintTitle();
             mitarbeiter.ForEach(Console.WriteLine);
             Console.WriteLine();
+        }
+
+        private void EditStatus()
+        {
+            Mitarbeiter mitarbeiter = GetMitarbeiter();
+            if (null != mitarbeiter)
+            {
+                Console.WriteLine($"Alter Wert: {mitarbeiter.Status}");
+                Status neuerStatus = ChooseStatus();
+                ConsoleUtils.PrintSaveTemporary();
+                if(Console.ReadLine() == "y")
+                {
+                    mitarbeiter.Status = neuerStatus;
+                }
+            }
+            else
+            {
+                PrintKeinMitarbeiter();
+            }
+        }
+
+        private void EditAbteilung()
+        {
+            Mitarbeiter mitarbeiter = GetMitarbeiter();
+
+            if (null != mitarbeiter)
+            {
+                Console.WriteLine($"Alter Wert: {mitarbeiter.Abteilung}");
+                Abteilung neueAbteilung = ChooseAbteilung();
+                ConsoleUtils.PrintSaveTemporary();
+                if (Console.ReadLine() == "y")
+                {
+                    mitarbeiter.Abteilung = neueAbteilung;
+                }
+            }
+            else
+            {
+                PrintKeinMitarbeiter();
+            }
         }
 
         private void NewMitarbeiter()
@@ -115,6 +157,24 @@ namespace Schoeppli.View
             if(Console.ReadLine() == "y")
             {
                 controller.SaveNewMitarbeiter(mitarbeiter);
+            }
+        }
+
+        private void DeleteMitarbeiter()
+        {
+            Mitarbeiter mitarbeiter = GetMitarbeiter();
+            if (null != mitarbeiter)
+            {
+                Console.WriteLine($"Soll Mitarbeiter {mitarbeiter.Vorname} {mitarbeiter.Nachname} wirklich gelöscht werden? y/n");
+                ConsoleUtils.PrintPrompt();
+                if (Console.ReadLine() == "y")
+                {
+                    controller.GetAllMitarbeiter().Remove(mitarbeiter);
+                }
+            }
+            else
+            {
+                PrintKeinMitarbeiter();
             }
         }
 
@@ -195,6 +255,21 @@ namespace Schoeppli.View
 
                 ConsoleUtils.PrintInvalidMessage();
             } while (true);
+        }
+
+        private Mitarbeiter GetMitarbeiter()
+        {
+            ShowAll(controller.GetAllMitarbeiter());
+            int mitarbeiterId = ConsoleUtils.GetUserInputAsInt("Von welchem Mitarbeiter? [ID]");
+
+            return controller.GetAllMitarbeiter().Where(x => x.ID == mitarbeiterId).SingleOrDefault();
+        }
+
+        private void PrintKeinMitarbeiter()
+        {
+            Console.WriteLine("Mitarbeiter existiert nicht!");
+            ConsoleUtils.PrintContinueMessage();
+            Console.ReadKey();
         }
     }
 }

@@ -74,11 +74,10 @@ namespace Schoeppli.Controller
 
         public void SaveNewMitarbeiter(Mitarbeiter nigelnagelneuerMitarbeiter)
         {
-            
             nigelnagelneuerMitarbeiter.ID = alleMitarbeiter.Count == 0 ?
                 1 :
                 alleMitarbeiter[alleMitarbeiter.Count - 1].ID + 1;
-            
+
             alleMitarbeiter.Add(nigelnagelneuerMitarbeiter);
         }
 
