@@ -76,6 +76,7 @@
     <Compile Include="View\MainView.cs" />
     <Compile Include="View\MitarbeiterView.cs" />
     <Compile Include="View\ProduktView.cs" />
+    <Compile Include="View\RechnungsView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

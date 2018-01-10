@@ -14,13 +14,14 @@ namespace Schoeppli
     class Program
     {
         private static string dbPath = @"C:\_Database";
+        private static string billPath = $@"{dbPath}\Rechnungen";
 
         static void Main(string[] args)
         {
             // check if db path exists, create if not
-            if (!Directory.Exists(dbPath))
+            if (!Directory.Exists(billPath))
             {
-                Directory.CreateDirectory(dbPath);                
+                Directory.CreateDirectory(billPath);
             }
 
             MainView view = new MainView();
