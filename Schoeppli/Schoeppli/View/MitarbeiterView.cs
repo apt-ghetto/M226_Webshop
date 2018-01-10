@@ -37,7 +37,7 @@ namespace Schoeppli.View
             byte input;
             do
             {
-                Console.Clear();
+                ;
                 ConsoleUtils.PrintTitle();
                 ShowMenu();
                 ConsoleUtils.PrintPrompt();
@@ -79,7 +79,6 @@ namespace Schoeppli.View
 
         public void ShowAll(List<Mitarbeiter> mitarbeiter)
         {
-            Console.Clear();
             ConsoleUtils.PrintTitle();
             mitarbeiter.ForEach(Console.WriteLine);
             Console.WriteLine();
@@ -126,7 +125,6 @@ namespace Schoeppli.View
 
         private void NewMitarbeiter()
         {
-            Console.Clear();
             ConsoleUtils.PrintTitle();
 
             string vorname, nachname, adresse, plz;
@@ -149,7 +147,7 @@ namespace Schoeppli.View
             lohn = ConsoleUtils.GetUserInputAsInt("Lohn: ");
 
             Mitarbeiter mitarbeiter = new Mitarbeiter(-1, vorname, nachname,
-                geburtsdatum, adresse, plz, abteilung, 12, status);
+                geburtsdatum, adresse, plz, abteilung, lohn, status);
 
             Console.WriteLine(mitarbeiter.GetInfoAll());
             Console.WriteLine();
@@ -260,7 +258,7 @@ namespace Schoeppli.View
         private Mitarbeiter GetMitarbeiter()
         {
             ShowAll(controller.GetAllMitarbeiter());
-            int mitarbeiterId = ConsoleUtils.GetUserInputAsInt("Welcher Mitarbeiter? [ID]");
+            int mitarbeiterId = ConsoleUtils.GetUserInputAsInt("Welcher Mitarbeiter? [ID]: ");
 
             return controller.GetAllMitarbeiter().Where(x => x.ID == mitarbeiterId).SingleOrDefault();
         }

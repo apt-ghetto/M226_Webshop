@@ -15,28 +15,19 @@ namespace Schoeppli.Model
         public Kategorie Kategorie { get; set; }
         public int Preis { get; set; }
         public int Bestand { get; set; }
-        public int MinAnzahl { get; set; }
-        public int MaxAnzahl { get; set; }
 
         public Produkt()
         {
-
+            // do not delete
         }
 
-        public Produkt(int id, string beschreibung, Kategorie kategorie, int preis, int bestand, int minAnzahl, int maxAnzahl)
+        public Produkt(int id, string beschreibung, Kategorie kategorie, int preis, int bestand)
         {
             ID = id;
             Beschreibung = beschreibung;
             Kategorie = kategorie;
             Preis = preis;
             Bestand = bestand;
-            MinAnzahl = minAnzahl;
-            MaxAnzahl = maxAnzahl;
-        }
-
-        public static string GetFilePath()
-        {
-            return @"C:\_Database\Produkte.json";
         }
 
         public override string ToString()
@@ -46,7 +37,7 @@ namespace Schoeppli.Model
 
         public string GetInfoAll()
         {
-            return $"Beschreibung: {Beschreibung}, Kategorie: {Kategorie}, Preis: {Preis}, Bestand: {Bestand}, MinAnzahl: {MinAnzahl}, MaxAnzahl: {MaxAnzahl}";
+            return $"Beschreibung: {Beschreibung}, Kategorie: {Kategorie}, Preis: {Preis}, Bestand: {Bestand}";
         }
     }
 }

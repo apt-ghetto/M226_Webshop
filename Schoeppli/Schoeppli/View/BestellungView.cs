@@ -12,14 +12,17 @@ namespace Schoeppli.View
 {
     public class BestellungView : ISubView<Bestellung>
     {
-        private BestellungController controller;
-        private PersonController pcontroller;
+        private BestellungController bController;
+        private PersonController pController;
+        private ProduktController aController;
 
-        public BestellungView(BestellungController controller, PersonController pcontroller)
+        public BestellungView(BestellungController controller, PersonController pController, ProduktController aController)
         {
-            this.controller = controller;
-            this.pcontroller = pcontroller;
+            this.bController = controller;
+            this.pController = pController;
+            this.aController = aController;
         }
+
         public void ShowMenu()
         {
             Console.WriteLine("1) Alle Bestellungen anzeigen");
@@ -36,7 +39,6 @@ namespace Schoeppli.View
             byte input;
             do
             {
-                Console.Clear();
                 ConsoleUtils.PrintTitle();
                 ShowMenu();
                 ConsoleUtils.PrintPrompt();
@@ -46,7 +48,7 @@ namespace Schoeppli.View
                     switch (input)
                     {
                         case 1:
-                            ShowAll(controller.GetAllBestellungen());
+                            ShowAll(bController.GetAllBestellungen());
                             ConsoleUtils.PrintContinueMessage();
                             Console.ReadKey();
                             break;
@@ -57,6 +59,7 @@ namespace Schoeppli.View
                             NewBestellung();
                             break;
                         case 4:
+                            DeleteBestellung();
                             break;
                         case 9:
                             break;
@@ -75,7 +78,6 @@ namespace Schoeppli.View
 
         public void ShowAll(List<Bestellung> bestellungen)
         {
-            Console.Clear();
             ConsoleUtils.PrintTitle();
             bestellungen.ForEach(Console.WriteLine);
             Console.WriteLine();
@@ -102,19 +104,36 @@ namespace Schoeppli.View
 
         private void NewBestellung()
         {
-            Console.Clear();
             ConsoleUtils.PrintTitle();
+            Kunde kunde;
+            
+            do
+            {
+                kunde = GetKunde();
+                if (kunde == null)
+                {
+                    ConsoleUtils.PrintInvalidMessage();
+                    ConsoleUtils.PrintContinueMessage();
+                    Console.ReadKey();
+                }
+            } while (kunde == null);
 
-            Kunde kunde = GetKunde();
             DateTime datum = DateTime.Now;
+            List<ArtikelBestellung> bestellteArtikel = GetBestellteArtikel();
 
             Bestellung bestellung = new Bestellung(-1, kunde, datum, Bestellstatus.Eingegangen);
+            bestellung.BestellteArtikel = bestellteArtikel;
             Console.WriteLine(bestellung.GetInfoAll());
+            ListAllProducts(bestellteArtikel);
             Console.WriteLine();
             ConsoleUtils.PrintSaveTemporary();
             if (Console.ReadLine() == "y")
             {
-                controller.SaveNewBestellung(bestellung);
+                bController.SaveNewBestellung(bestellung);
+                foreach (ArtikelBestellung position in bestellung.BestellteArtikel)
+                {
+                    aController.GetAllProducts().Find(p => p.ID == position.Artikelnummer).Bestand -= position.Anzahl;
+                }
             }
         }
 
@@ -128,7 +147,11 @@ namespace Schoeppli.View
                 ConsoleUtils.PrintPrompt();
                 if (Console.ReadLine() == "y")
                 {
-                    controller.GetAllBestellungen().Remove(bestellung);
+                    bController.GetAllBestellungen().Remove(bestellung);
+                    foreach (ArtikelBestellung position in bestellung.BestellteArtikel)
+                    {
+                        aController.GetAllProducts().Find(x => x.ID == position.Artikelnummer).Bestand += position.Anzahl;
+                    }
                 }
             }
             else
@@ -161,21 +184,76 @@ namespace Schoeppli.View
 
         private Bestellung GetBestellung()
         {
-            ShowAll(controller.GetAllBestellungen());
-            int bestellId = ConsoleUtils.GetUserInputAsInt("Welche Bestellung? [Bestellnr.]");
+            ShowAll(bController.GetAllBestellungen());
+            int bestellId = ConsoleUtils.GetUserInputAsInt("Welche Bestellung? [Bestellnr.]: ");
 
-            return controller.GetAllBestellungen().Where(x => x.Bestellnummer == bestellId).SingleOrDefault();
+            return bController.GetAllBestellungen().Where(x => x.Bestellnummer == bestellId).SingleOrDefault();
         }
         
         private Kunde GetKunde()
         {
-            Console.Clear();
             ConsoleUtils.PrintTitle();
-            pcontroller.GetAllKunden().ForEach(Console.WriteLine);
+            pController.GetAllKunden().ForEach(Console.WriteLine);
             Console.WriteLine();
-            int kundenId = ConsoleUtils.GetUserInputAsInt("Welcher Kunde? [ID]");
+            int kundenId = ConsoleUtils.GetUserInputAsInt("Welcher Kunde? [ID]: ");
 
-            return pcontroller.GetAllKunden().Where(x => x.ID == kundenId).SingleOrDefault();
+            return pController.GetAllKunden().Where(x => x.ID == kundenId).SingleOrDefault();
+        }
+
+        private List<ArtikelBestellung> GetBestellteArtikel()
+        {
+            List<ArtikelBestellung> bestellteArtikel = new List<ArtikelBestellung>();
+            bool addArtikel = true;
+
+            while (addArtikel)
+            {
+                ConsoleUtils.PrintTitle();
+                aController.GetAllProducts().ForEach(Console.WriteLine);
+                Console.WriteLine();
+
+                int artikelId = ConsoleUtils.GetUserInputAsInt("Welcher Artikel? [ID]: ");
+                Produkt artikel = aController.GetAllProducts().Where(x => x.ID == artikelId).SingleOrDefault();
+                if (artikel == null)
+                {
+                    ConsoleUtils.PrintInvalidMessage();
+                    ConsoleUtils.PrintContinueMessage();
+                    Console.ReadKey();
+                    continue;
+                }
+
+                int anzahl = ConsoleUtils.GetUserInputAsInt("Anzahl: ");
+                if (artikel.Bestand < anzahl || anzahl < 0)
+                {
+                    Console.WriteLine("Nicht genügend Artikel vorhanden oder Anzahl negativ.");
+                    ConsoleUtils.PrintContinueMessage();
+                    Console.ReadKey();
+                    continue;
+                }
+
+                Console.WriteLine("Artikel hinzufügen? y/n");
+                ConsoleUtils.PrintPrompt();
+                if (Console.ReadLine() == "y")
+                {
+                    bestellteArtikel.Add(new ArtikelBestellung(artikelId, anzahl));
+                }
+                Console.WriteLine("Weiteren Artikel hinzufügen? y/n");
+                ConsoleUtils.PrintPrompt();
+                if (Console.ReadLine() == "n")
+                {
+                    addArtikel = false;
+                }
+            }
+
+            return bestellteArtikel;
+        }
+
+        private void ListAllProducts(List<ArtikelBestellung> artikelListe)
+        {
+            foreach (ArtikelBestellung position in artikelListe)
+            {
+                string artikel = aController.GetAllProducts().Where(x => x.ID == position.Artikelnummer).SingleOrDefault().Beschreibung;
+                Console.WriteLine($"\tArtikel: {artikel}\tAnzahl: {position.Anzahl}");
+            }
         }
 
         private void PrintKeineBestellung()

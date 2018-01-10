@@ -16,23 +16,23 @@ namespace Schoeppli.Model
         public Bestellstatus Bestellstatus { get; set; }
         public List<ArtikelBestellung> BestellteArtikel { get; set; }
 
-        public Bestellung(int bestellnummer, Kunde besteller, DateTime bestellDatum, Bestellstatus bestellstatus)
+        public Bestellung(int bestellnummer, Kunde besteller, DateTime bestelldatum, Bestellstatus bestellstatus)
         {
             Bestellnummer = bestellnummer;
             Besteller = besteller;
-            Bestelldatum = Bestelldatum;
+            Bestelldatum = bestelldatum;
             Bestellstatus = bestellstatus;
             BestellteArtikel = new List<ArtikelBestellung>();
         }
 
         public string GetInfoAll()
         {
-            return $"Besteller: {Besteller.Vorname} {Besteller.Nachname}, Bestelldatum: {Bestelldatum}, Bestellstatus: {Bestellstatus}";
+            return $"Besteller: {Besteller.Vorname} {Besteller.Nachname}, Bestelldatum: {Bestelldatum.ToShortDateString()}, Bestellstatus: {Bestellstatus}";
         }
 
         public override string ToString()
         {
-            return $"BstNr: {Bestellnummer}\tKunde:{Besteller.Vorname} {Besteller.Nachname}\tDatum: {Bestelldatum}\tStatus: {Bestellstatus}\n";
+            return $"BstNr: {Bestellnummer}\tKunde:{Besteller.Vorname} {Besteller.Nachname}\tDatum: {Bestelldatum.ToShortDateString()}\tStatus: {Bestellstatus}\n";
         }
         
     }

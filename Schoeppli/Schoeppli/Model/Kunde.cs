@@ -15,12 +15,7 @@ namespace Schoeppli.Model
         {
             Kundennummer = kundennummer;
         }
-
-        public static string GetFilePath()
-        {
-            return @"C:\_Database\Kunden.json";
-        }
-
+       
         public override string GetInfoAll()
         {
             string info =  base.GetInfoAll();

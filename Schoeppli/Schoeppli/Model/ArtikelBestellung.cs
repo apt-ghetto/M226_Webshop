@@ -8,8 +8,13 @@ namespace Schoeppli.Model
 {
     public class ArtikelBestellung
     {
-        public int Bestellnummer { get; set; }
         public int Artikelnummer { get; set; }
         public int Anzahl { get; set; }
+
+        public ArtikelBestellung(int aNummer, int anzahl)
+        {
+            Artikelnummer = aNummer;
+            Anzahl = anzahl;
+        }
     }
 }

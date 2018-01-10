@@ -12,6 +12,7 @@ namespace Schoeppli.Controller
 {
     public class ProduktController : IDataAccess
     {
+        private static string filePath = @"C:\_Database\Produkte.json";
         List<Produkt> alleProdukte;
 
         public ProduktController()
@@ -19,28 +20,14 @@ namespace Schoeppli.Controller
             ReadData();
         }
 
-        // Only for creating test data
-        public void InitialiseProducts()
-        {
-            alleProdukte = new List<Produkt>();
-            Produkt produkt = new Produkt(1, "Gigigampfi",
-                Kategorie.Garten, 800000,
-                12, 0, 5);
-            alleProdukte.Add(produkt);
-            produkt = new Produkt(2, "Absinth 1L", Kategorie.Alkohol,
-                2400, 18, 5, 120);
-            alleProdukte.Add(produkt);
-
-        }
-
         public void WriteData()
         {
-            DataAccess<Produkt>.WriteToFile(alleProdukte, Produkt.GetFilePath());
+            DataAccess<Produkt>.WriteToFile(alleProdukte, filePath);
         }
 
         public void ReadData()
         {
-            alleProdukte = DataAccess<Produkt>.ReadFromFile(Produkt.GetFilePath());
+            alleProdukte = DataAccess<Produkt>.ReadFromFile(filePath);
         }
 
         public List<Produkt> GetAllProducts()

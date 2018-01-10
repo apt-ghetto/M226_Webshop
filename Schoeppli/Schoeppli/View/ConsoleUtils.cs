@@ -10,9 +10,9 @@ namespace Schoeppli.View
     {
         public static void PrintTitle()
         {
+            Console.Clear();
             Console.WriteLine("***  ***  ***  ***  SCHÖPPLI  ***  ***  ***  ***\n\n");
         }
-
 
         public static void PrintPrompt()
         {
@@ -41,8 +41,7 @@ namespace Schoeppli.View
 
             do
             {
-                Console.WriteLine(userText);
-                PrintPrompt();
+                Console.Write(userText);
 
                 if (Int32.TryParse(Console.ReadLine(), out number))
                 {

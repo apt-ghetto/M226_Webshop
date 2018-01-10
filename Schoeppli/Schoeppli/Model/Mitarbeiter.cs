@@ -21,11 +21,6 @@ namespace Schoeppli.Model
             Status = status;
         }
 
-        public static string GetFilePath()
-        {
-            return @"C:\_Database\Mitarbeiter.json";
-        }
-
         public override string GetInfoAll()
         {
             string info = base.GetInfoAll();

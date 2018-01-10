@@ -26,7 +26,6 @@ namespace Schoeppli.View
             byte input;            
             do
             {
-                Console.Clear();
                 ConsoleUtils.PrintTitle();
                 ShowMenu();
                 ConsoleUtils.PrintPrompt();
@@ -47,7 +46,7 @@ namespace Schoeppli.View
                             produktView.ShowView();
                             break;
                         case 4:
-                            BestellungView bestellungView = new BestellungView(bestellCtrl, personenCtrl);
+                            BestellungView bestellungView = new BestellungView(bestellCtrl, personenCtrl, produktCtrl);
                             bestellungView.ShowView();
                             break;
                         case 5:
@@ -58,6 +57,7 @@ namespace Schoeppli.View
                         case 9:
                             personenCtrl.WriteData();
                             produktCtrl.WriteData();
+                            bestellCtrl.WriteData();
                             break;
                         default:
                             ConsoleUtils.PrintInvalidMessage();

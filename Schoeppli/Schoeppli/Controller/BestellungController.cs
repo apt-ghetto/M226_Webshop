@@ -22,6 +22,10 @@ namespace Schoeppli.Controller
         public void ReadData()
         {
             alleBestellungen = DataAccess<Bestellung>.ReadFromFile(bestellPath);
+            if (alleBestellungen == null)
+            {
+                alleBestellungen = new List<Bestellung>();
+            }
         }
 
         public void WriteData()
@@ -31,7 +35,7 @@ namespace Schoeppli.Controller
 
         public List<Bestellung> GetAllBestellungen()
         {
-            return alleBestellungen != null ? alleBestellungen : new List<Bestellung>();
+            return alleBestellungen;
         }
 
         public void SaveNewBestellung(Bestellung nigelnagelneueBestellung)

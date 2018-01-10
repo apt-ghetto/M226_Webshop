@@ -24,7 +24,6 @@ namespace Schoeppli.View
             byte input;
             do
             {
-                Console.Clear();
                 ConsoleUtils.PrintTitle();
                 ShowMenu();
                 ConsoleUtils.PrintPrompt();
@@ -42,11 +41,11 @@ namespace Schoeppli.View
                             break;
                         case 3:
                             ShowAll(controller.GetAllProducts());
-                            EditProduct(GetUserInputAsInt("Welches Produkt soll bearbeitet werden? [ID]"));
+                            EditProduct(ConsoleUtils.GetUserInputAsInt("Welches Produkt soll bearbeitet werden? [ID]"));
                             break;
                         case 4:
                             ShowAll(controller.GetAllProducts());
-                            DeleteProduct(GetUserInputAsInt("Welches Produkt soll gelöscht werden? [ID]"));
+                            DeleteProduct(ConsoleUtils.GetUserInputAsInt("Welches Produkt soll gelöscht werden? [ID]"));
                             break;
                         case 5:
 
@@ -79,7 +78,6 @@ namespace Schoeppli.View
 
         public void ShowAll(List<Produkt> produkte)
         {
-            Console.Clear();
             ConsoleUtils.PrintTitle();
             produkte.ForEach(Console.WriteLine);
             Console.WriteLine();
@@ -89,7 +87,6 @@ namespace Schoeppli.View
         {
             Produkt neuesProdukt = new Produkt();
 
-            Console.Clear();
             ConsoleUtils.PrintTitle();
 
             Console.Write("Beschreibung: ");
@@ -99,16 +96,10 @@ namespace Schoeppli.View
             neuesProdukt.Kategorie = ChooseCategory();
             Console.WriteLine();
 
-            neuesProdukt.Preis = GetUserInputAsInt("Preis in Rappen: ");
+            neuesProdukt.Preis = ConsoleUtils.GetUserInputAsInt("Preis in Rappen: ");
             Console.WriteLine();
 
-            neuesProdukt.Bestand = GetUserInputAsInt("Bestand: ");
-            Console.WriteLine();
-
-            neuesProdukt.MinAnzahl = GetUserInputAsInt("Min. Anzahl: ");
-            Console.WriteLine();
-
-            neuesProdukt.MaxAnzahl = GetUserInputAsInt("Max. Anzahl: ");
+            neuesProdukt.Bestand = ConsoleUtils.GetUserInputAsInt("Bestand: ");
             Console.WriteLine();
 
             Console.WriteLine(neuesProdukt.GetInfoAll());
@@ -123,7 +114,6 @@ namespace Schoeppli.View
 
         private void EditProduct(int productID)
         {
-            Console.Clear();
             ConsoleUtils.PrintTitle();
 
             Produkt originalProdukt = controller.GetAllProducts().Where(x => x.ID == productID).SingleOrDefault();
@@ -131,17 +121,16 @@ namespace Schoeppli.View
             if (originalProdukt != null)
             {
                 Produkt bearbeitetesProdukt = new Produkt(originalProdukt.ID, originalProdukt.Beschreibung,
-                    originalProdukt.Kategorie, originalProdukt.Preis, originalProdukt.Bestand, originalProdukt.MinAnzahl, originalProdukt.MaxAnzahl);
+                    originalProdukt.Kategorie, originalProdukt.Preis, originalProdukt.Bestand);
                 string userInput;
 
                 do
                 {
+                    Console.Clear();
                     Console.WriteLine("1) Beschreibung");
                     Console.WriteLine("2) Kategorie");
                     Console.WriteLine("3) Preis");
                     Console.WriteLine("4) Bestand");
-                    Console.WriteLine("5) Min. Anzahl");
-                    Console.WriteLine("6) Max. Anzahl");
                     Console.WriteLine();
                     Console.WriteLine("8) Temporär speichern");
                     Console.WriteLine();
@@ -164,27 +153,19 @@ namespace Schoeppli.View
                             break;
                         case "3":
                             Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.Preis}");
-                            bearbeitetesProdukt.Preis = GetUserInputAsInt("Neuer Wert: ");
+                            bearbeitetesProdukt.Preis = ConsoleUtils.GetUserInputAsInt("Neuer Wert: ");
                             break;
                         case "4":
                             Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.Bestand}");
-                            bearbeitetesProdukt.Bestand = GetUserInputAsInt("Neuer Wert: ");
-                            break;
-                        case "5":
-                            Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.MinAnzahl}");
-                            bearbeitetesProdukt.MinAnzahl = GetUserInputAsInt("Neuer Wert: ");
-                            break;
-                        case "6":
-                            Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.MaxAnzahl}");
-                            bearbeitetesProdukt.MaxAnzahl = GetUserInputAsInt("Neuer Wert: ");
+                            bearbeitetesProdukt.Bestand = ConsoleUtils.GetUserInputAsInt("Neuer Wert: ");
                             break;
                         case "8":
                             controller.GetAllProducts()[controller.GetAllProducts().FindIndex(ind => ind.ID == bearbeitetesProdukt.ID)] = bearbeitetesProdukt;
+                            userInput = "9";
                             break;
                         default:
                             break;
-                    }
-                    Console.Clear();
+                    }                    
                 } while (userInput != "9");
 
             }
@@ -198,7 +179,6 @@ namespace Schoeppli.View
 
         private void DeleteProduct(int id)
         {
-            Console.Clear();
             ConsoleUtils.PrintTitle();
             Produkt produkt = controller.GetAllProducts().Where(x => x.ID == id).SingleOrDefault();
 
@@ -244,9 +224,6 @@ namespace Schoeppli.View
             } while (true);            
         }
 
-        private int GetUserInputAsInt(string userText)
-        {
-            return ConsoleUtils.GetUserInputAsInt(userText);
-        }
+        
     }
 }

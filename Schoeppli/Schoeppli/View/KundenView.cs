@@ -35,7 +35,7 @@ namespace Schoeppli.View
             byte input;
             do
             {
-                Console.Clear();
+                ;
                 ConsoleUtils.PrintTitle();
                 ShowMenu();
                 ConsoleUtils.PrintPrompt();
@@ -74,7 +74,7 @@ namespace Schoeppli.View
 
         public void ShowAll(List<Kunde> kunden)
         {
-            Console.Clear();
+            ;
             ConsoleUtils.PrintTitle();
             kunden.ForEach(Console.WriteLine);
             Console.WriteLine();
@@ -105,23 +105,27 @@ namespace Schoeppli.View
                     Console.WriteLine("9) Zurück");
 
 
-                    input = ConsoleUtils.GetUserInputAsInt("Welche Eigenschaft soll bearbeitet werden?");
+                    input = ConsoleUtils.GetUserInputAsInt("Welche Eigenschaft soll bearbeitet werden?: ");
                     switch (input)
                     {
                         case 1:
                             Console.WriteLine($"Alter Wert: {bearbeiteterKunde.Vorname}");
+                            Console.Write("Neuer Wert: ");
                             bearbeiteterKunde.Vorname = Console.ReadLine();
                             break;
                         case 2:
                             Console.WriteLine($"Alter Wert: {bearbeiteterKunde.Nachname}");
+                            Console.Write("Neuer Wert: ");
                             bearbeiteterKunde.Nachname = Console.ReadLine();
                             break;
                         case 3:
                             Console.WriteLine($"Alter Wert: {bearbeiteterKunde.Adresse}");
+                            Console.Write("Neuer Wert: ");
                             bearbeiteterKunde.Adresse = Console.ReadLine();
                             break;
                         case 4:
                             Console.WriteLine($"Alter Wert: {bearbeiteterKunde.PLZ}");
+                            Console.Write("Neuer Wert: ");
                             bearbeiteterKunde.PLZ = Console.ReadLine();
                             break;
                         case 5:
@@ -130,14 +134,17 @@ namespace Schoeppli.View
                             break;
                         case 6:
                             Console.WriteLine($"Alter Wert: {bearbeiteterKunde.Kundennummer}");
+                            Console.Write("Neuer Wert: ");
                             bearbeiteterKunde.Kundennummer = Console.ReadLine();
                             break;
                         case 8:
                             controller.GetAllKunden()[controller.GetAllKunden().FindIndex(ind => ind.ID == bearbeiteterKunde.ID)] = bearbeiteterKunde;
+                            input = 9; //leave function
                             break;
                         case 9:
                             break;
                         default:
+                            ConsoleUtils.PrintInvalidMessage();
                             break;
                     }
                     Console.Clear();
@@ -151,7 +158,7 @@ namespace Schoeppli.View
 
         private void NewKunde()
         {
-            Console.Clear();
+            ;
             ConsoleUtils.PrintTitle();
 
             string vorname, nachname, adresse, plz, kundennummer;
@@ -231,7 +238,7 @@ namespace Schoeppli.View
         private Kunde GetKunde()
         {
             ShowAll(controller.GetAllKunden());
-            int kundenId = ConsoleUtils.GetUserInputAsInt("Welcher Kunde? [ID]");
+            int kundenId = ConsoleUtils.GetUserInputAsInt("Welcher Kunde? [ID]: ");
 
             return controller.GetAllKunden().Where(x => x.ID == kundenId).SingleOrDefault();
         }
