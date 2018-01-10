@@ -1,4 +1,5 @@
-﻿using Schoeppli.Model.Enumerator;
+﻿using Schoeppli.Interface;
+using Schoeppli.Model.Enumerator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.Model
 {
-    public class Bestellung
+    public class Bestellung : IModel
     {
         public int Bestellnummer { get; set; }
         public Kunde Besteller { get; set; }
@@ -23,5 +24,16 @@ namespace Schoeppli.Model
             Bestellstatus = bestellstatus;
             BestellteArtikel = new List<ArtikelBestellung>();
         }
+
+        public string GetInfoAll()
+        {
+            return $"Besteller: {Besteller.Vorname} {Besteller.Nachname}, Bestelldatum: {Bestelldatum}, Bestellstatus: {Bestellstatus}";
+        }
+
+        public override string ToString()
+        {
+            return $"BstNr: {Bestellnummer}\tKunde:{Besteller.Vorname} {Besteller.Nachname}\tDatum: {Bestelldatum}\tStatus: {Bestellstatus}\n";
+        }
+        
     }
 }

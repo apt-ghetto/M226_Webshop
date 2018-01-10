@@ -25,10 +25,18 @@ namespace Schoeppli.Generic
         {
             List<T> allObjects = new List<T>();
 
-            using (StreamReader reader = new StreamReader(filePath))
+            try
             {
-                string data = reader.ReadToEnd();
-                allObjects = JsonConvert.DeserializeObject<List<T>>(data);
+                using (StreamReader reader = new StreamReader(filePath))
+                {
+                    string data = reader.ReadToEnd();
+                    allObjects = JsonConvert.DeserializeObject<List<T>>(data);
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                FileStream file = File.Create(filePath);
+                file.Close();
             }
 
             return allObjects;

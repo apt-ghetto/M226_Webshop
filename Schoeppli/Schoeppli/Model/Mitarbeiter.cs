@@ -32,5 +32,9 @@ namespace Schoeppli.Model
             return info + $", Abteilung: {Abteilung}, Lohn: {Lohn}, Status: {Status}";
         }
 
+        public override string ToString()
+        {
+            return $"ID: {ID}\tVorname: {Vorname}\tNachname: {Nachname}\tAbteilung: {Abteilung}\tStatus: {Status}\n";
+        }
     }
 }

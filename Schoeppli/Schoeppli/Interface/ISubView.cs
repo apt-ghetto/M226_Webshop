@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.Interface
 {
-    public interface IModel
+    public interface ISubView<T> : IView
     {
-        string GetInfoAll();
+        void ShowAll(List<T> items);
     }
 }

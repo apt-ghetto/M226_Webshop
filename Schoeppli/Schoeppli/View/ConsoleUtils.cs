@@ -29,6 +29,30 @@ namespace Schoeppli.View
             Console.Write("Beliebige Taste drücken...");
         }
 
+        public static void PrintSaveTemporary()
+        {
+            Console.WriteLine("Änderung temporär übernehmen? y/n");
+            PrintPrompt();
+        }
 
+        public static int GetUserInputAsInt(string userText)
+        {
+            int number;
+
+            do
+            {
+                Console.WriteLine(userText);
+                PrintPrompt();
+
+                if (Int32.TryParse(Console.ReadLine(), out number))
+                {
+                    return number;
+                }
+                else
+                {
+                    PrintInvalidMessage();
+                }
+            } while (true);
+        }
     }
 }

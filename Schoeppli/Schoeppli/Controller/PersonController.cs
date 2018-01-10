@@ -20,6 +20,8 @@ namespace Schoeppli.Controller
 
         public PersonController()
         {
+            alleKunden = new List<Kunde>();
+            alleMitarbeiter = new List<Mitarbeiter>();
             ReadData();
         }
 
@@ -59,6 +61,35 @@ namespace Schoeppli.Controller
         {
             alleKunden = DataAccess<Kunde>.ReadFromFile(Kunde.GetFilePath());
             alleMitarbeiter = DataAccess<Mitarbeiter>.ReadFromFile(Mitarbeiter.GetFilePath());
+        }
+
+        public List<Mitarbeiter> GetAllMitarbeiter()
+        {
+            return alleMitarbeiter != null ? alleMitarbeiter : new List<Mitarbeiter>();
+        }
+
+        public List<Kunde> GetAllKunden()
+        {
+            return alleKunden != null ? alleKunden : new List<Kunde>();
+
+        }
+
+        public void SaveNewMitarbeiter(Mitarbeiter nigelnagelneuerMitarbeiter)
+        {
+            nigelnagelneuerMitarbeiter.ID = alleMitarbeiter.Count == 0 ?
+                1 :
+                alleMitarbeiter[alleMitarbeiter.Count - 1].ID + 1;
+
+            alleMitarbeiter.Add(nigelnagelneuerMitarbeiter);
+        }
+
+        public void SaveNewKunde(Kunde nigelnagelneuerKunde)
+        {
+            nigelnagelneuerKunde.ID = alleKunden.Count == 0 ?
+                1 :
+                alleKunden[alleKunden.Count - 1].ID + 1;
+
+            alleKunden.Add(nigelnagelneuerKunde);
         }
 
     }
