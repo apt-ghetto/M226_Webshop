@@ -82,7 +82,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Plunder\Testdaten\Kunden.json" />
-    <None Include="Plunder\Testdaten\Mitarbeiter.json" />
     <None Include="Plunder\Testdaten\Produkte.json" />
   </ItemGroup>
   <ItemGroup>

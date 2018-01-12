@@ -33,14 +33,15 @@ namespace Schoeppli.Controller
         public void ReadData()
         {
             alleKunden = DataAccess<Kunde>.ReadFromFile(kundenFilePath);
+            if (alleKunden == null)
+            {
+                alleKunden = new List<Kunde>();
+            }
+
             alleMitarbeiter = DataAccess<Mitarbeiter>.ReadFromFile(mitarbeiterFilePath);
             if (alleMitarbeiter == null)
             {
                 alleMitarbeiter = new List<Mitarbeiter>();
-            }
-            if (alleKunden == null)
-            {
-                alleKunden = new List<Kunde>();
             }
         }
 

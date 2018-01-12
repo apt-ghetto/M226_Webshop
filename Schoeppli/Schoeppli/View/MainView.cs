@@ -78,10 +78,10 @@ namespace Schoeppli.View
             Console.WriteLine("2) Kundenverwaltung");
             Console.WriteLine("3) Produktverwaltung");
             Console.WriteLine("4) Bestellungen");
-            Console.WriteLine("5) Rechnungswesen");
+            Console.WriteLine("5) Rechnungen");
             Console.WriteLine();
-            Console.WriteLine("8) Beenden ohne Speichern");
             Console.WriteLine();
+            Console.WriteLine("8) Beenden ohne zu Speichern");
             Console.WriteLine("9) Speichern und Beenden");
             Console.WriteLine();
         }

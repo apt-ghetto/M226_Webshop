@@ -25,7 +25,7 @@ namespace Schoeppli.View
             Console.WriteLine("1) Alle Mitarbeiter anzeigen");
             Console.WriteLine("2) Status von Mitarbeiter ändern");
             Console.WriteLine("3) Abteilung von Mitarbeiter ändern");
-            Console.WriteLine("4) Neuer Mitarbeiter");
+            Console.WriteLine("4) Neuer Mitarbeiter erstellen");
             Console.WriteLine("5) Mitarbeiter löschen");
             Console.WriteLine();
             Console.WriteLine("9) Zurück");
@@ -37,7 +37,6 @@ namespace Schoeppli.View
             byte input;
             do
             {
-                ;
                 ConsoleUtils.PrintTitle();
                 ShowMenu();
                 ConsoleUtils.PrintPrompt();
@@ -144,11 +143,12 @@ namespace Schoeppli.View
             geburtsdatum = GetGeburtstag();
             abteilung = ChooseAbteilung();
             status = ChooseStatus();
-            lohn = ConsoleUtils.GetUserInputAsInt("Lohn: ");
+            lohn = ConsoleUtils.GetUserInputAsInt("Lohn (Franken/Monat): ");
 
             Mitarbeiter mitarbeiter = new Mitarbeiter(-1, vorname, nachname,
                 geburtsdatum, adresse, plz, abteilung, lohn, status);
 
+            Console.WriteLine();
             Console.WriteLine(mitarbeiter.GetInfoAll());
             Console.WriteLine();
             ConsoleUtils.PrintSaveTemporary();
