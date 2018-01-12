@@ -37,7 +37,15 @@ namespace Schoeppli.Controller
 
         public void SaveNewProduct(Produkt nigelnagelneuesProdukt)
         {
-            nigelnagelneuesProdukt.ID = alleProdukte[alleProdukte.Count - 1].ID + 1;
+            if (alleProdukte != null)
+            {
+                nigelnagelneuesProdukt.ID = alleProdukte[alleProdukte.Count - 1].ID + 1;
+            }
+            else
+            {
+                alleProdukte = new List<Produkt>();
+                nigelnagelneuesProdukt.ID = 1;
+            }
 
             alleProdukte.Add(nigelnagelneuesProdukt);
         }

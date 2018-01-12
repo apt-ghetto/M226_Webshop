@@ -50,7 +50,8 @@ namespace Schoeppli.View
                             bestellungView.ShowView();
                             break;
                         case 5:
-                            //RechnungsView rechnungsView =
+                            RechnungsView rechnungsView = new RechnungsView(bestellCtrl, produktCtrl);
+                            rechnungsView.ShowView();
                             break;
                         case 8:
                             break;

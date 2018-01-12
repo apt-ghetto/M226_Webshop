@@ -79,7 +79,10 @@ namespace Schoeppli.View
         public void ShowAll(List<Produkt> produkte)
         {
             ConsoleUtils.PrintTitle();
-            produkte.ForEach(Console.WriteLine);
+            if (produkte != null)
+            {
+                produkte.ForEach(Console.WriteLine);
+            }            
             Console.WriteLine();
         }
 
