@@ -252,7 +252,7 @@ namespace Schoeppli.View
             foreach (ArtikelBestellung position in artikelListe)
             {
                 string artikel = aController.GetAllProducts().Where(x => x.ID == position.Artikelnummer).SingleOrDefault().Beschreibung;
-                Console.WriteLine($"\tArtikel: {artikel}\tAnzahl: {position.Anzahl}");
+                Console.WriteLine($"\tArtikel: {artikel}".PadRight(35) + $"Anzahl: {position.Anzahl}");
             }
         }
 

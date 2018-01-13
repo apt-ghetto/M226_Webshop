@@ -35,7 +35,6 @@ namespace Schoeppli.View
             byte input;
             do
             {
-                ;
                 ConsoleUtils.PrintTitle();
                 ShowMenu();
                 ConsoleUtils.PrintPrompt();
@@ -74,7 +73,6 @@ namespace Schoeppli.View
 
         public void ShowAll(List<Kunde> kunden)
         {
-            ;
             ConsoleUtils.PrintTitle();
             kunden.ForEach(Console.WriteLine);
             Console.WriteLine();
@@ -82,8 +80,7 @@ namespace Schoeppli.View
 
         public void EditKunde()
         {
-            Kunde kunde = GetKunde();
-            
+            Kunde kunde = GetKunde();            
 
             if (null != kunde)
             {
@@ -93,6 +90,8 @@ namespace Schoeppli.View
 
                 do
                 {
+                    Console.Clear();
+                    Console.WriteLine();
                     Console.WriteLine("1) Vorname");
                     Console.WriteLine("2) Nachname");
                     Console.WriteLine("3) Adresse");
@@ -103,6 +102,7 @@ namespace Schoeppli.View
                     Console.WriteLine("8) Temporär speichern");
                     Console.WriteLine();
                     Console.WriteLine("9) Zurück");
+                    Console.WriteLine();
 
 
                     input = ConsoleUtils.GetUserInputAsInt("Welche Eigenschaft soll bearbeitet werden?: ");
@@ -129,7 +129,7 @@ namespace Schoeppli.View
                             bearbeiteterKunde.PLZ = Console.ReadLine();
                             break;
                         case 5:
-                            Console.WriteLine($"Alter Wert: {bearbeiteterKunde.Geburtsdatum}");
+                            Console.WriteLine($"Alter Wert: {bearbeiteterKunde.Geburtsdatum.ToShortDateString()}");
                             bearbeiteterKunde.Geburtsdatum = GetGeburtstag();
                             break;
                         case 6:
@@ -138,7 +138,7 @@ namespace Schoeppli.View
                             bearbeiteterKunde.Kundennummer = Console.ReadLine();
                             break;
                         case 8:
-                            controller.GetAllKunden()[controller.GetAllKunden().FindIndex(ind => ind.ID == bearbeiteterKunde.ID)] = bearbeiteterKunde;
+                            controller.GetAllKunden()[controller.GetAllKunden().FindIndex(ind => ind.ID == bearbeiteterKunde.ID)] = bearbeiteterKunde; // override old infos
                             input = 9; //leave function
                             break;
                         case 9:
@@ -147,7 +147,6 @@ namespace Schoeppli.View
                             ConsoleUtils.PrintInvalidMessage();
                             break;
                     }
-                    Console.Clear();
                 } while (input != 9);
             }
             else
@@ -158,7 +157,6 @@ namespace Schoeppli.View
 
         private void NewKunde()
         {
-            ;
             ConsoleUtils.PrintTitle();
 
             string vorname, nachname, adresse, plz, kundennummer;

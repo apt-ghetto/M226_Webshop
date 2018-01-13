@@ -28,12 +28,16 @@ namespace Schoeppli.Model
 
         public override string ToString()
         {
-            return $"ID: {ID}\tVorname: {Vorname}\tNachname: {Nachname}\n";
+            string formattedString = $"ID: {ID}".PadRight(10) +
+                $"Vorname: {Vorname}".PadRight(25) +
+                $"Nachname: {Nachname}";
+
+            return formattedString;
         }
 
         public virtual string GetInfoAll()
         {
-            return $"Vorname: {Vorname}, Nachname: {Nachname}, Geburtsdatum: {Geburtsdatum}, Adresse: {Adresse}, PLZ: {PLZ}";
+            return $"Vorname: {Vorname}, Nachname: {Nachname}, Geburtsdatum: {Geburtsdatum.ToShortDateString()}, Adresse: {Adresse}, PLZ: {PLZ}";
         }
     }
 }

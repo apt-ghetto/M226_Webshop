@@ -72,24 +72,17 @@ namespace Schoeppli.View
             int counter = 0;
             foreach (string filePath in controller.GetAllBills())
             {                
-                Console.Write(counter.ToString().PadLeft(10));
-                Console.WriteLine($"{Path.GetFileName(filePath)}".PadLeft(30));
+                Console.Write($"\t{counter}".PadRight(15));
+                Console.WriteLine(Path.GetFileName(filePath));
                 counter++;
             }
-        }
-
-        private Bestellung GetBestellung()
-        {
-            controller.GetAllBestellungen().ForEach(Console.WriteLine);
-            int bestellId = ConsoleUtils.GetUserInputAsInt("Rechnung welcher Bestellung soll erstellt werden? [Bestellnr.]: ");
-
-            return controller.GetAllBestellungen().Where(x => x.Bestellnummer == bestellId).SingleOrDefault();
+            Console.WriteLine();
         }
 
         private void CreateBill()
         {
-            Console.Clear();
             ConsoleUtils.PrintTitle();
+
             Bestellung bestellung = GetBestellung();
             if (bestellung != null)
             {
@@ -98,6 +91,7 @@ namespace Schoeppli.View
                 {
                     WriteFile(bestellung, filePath);
                     Console.WriteLine("Rechnung erfolgreich erstellt.");
+                    Console.WriteLine();
                     System.Diagnostics.Process.Start(filePath);
                 }
                 else
@@ -166,13 +160,14 @@ namespace Schoeppli.View
                 foreach (ArtikelBestellung position in bestellung.BestellteArtikel)
                 {
                     Produkt produkt = pController.GetAllProducts().Where(x => x.ID == position.Artikelnummer).Single();
+                    int produktZwischentotal = produkt.Preis * position.Anzahl;
                     totalCost += produkt.Preis * position.Anzahl;
                     sw.Write("\t");
                     sw.Write($"{position.Artikelnummer}".PadRight(5));
                     sw.Write($"{produkt.Beschreibung}".PadRight(25));
-                    sw.Write($"{produkt.Preis}.-".PadRight(15));
-                    sw.Write($"{position.Anzahl}".PadRight(15));
-                    sw.Write($"{produkt.Preis * position.Anzahl}.-");
+                    sw.Write($"{produkt.Preis / 100}.{(produkt.Preis % 100).ToString("00")}".PadRight(15));
+                    sw.Write($"{position.Anzahl}".PadRight(15));                    
+                    sw.Write($"{produktZwischentotal / 100}.{(produktZwischentotal % 100).ToString("00")}");
                     sw.WriteLine();
                 }
 
@@ -184,7 +179,7 @@ namespace Schoeppli.View
                 sw.WriteLine();
 
                 // Total cost   
-                sw.WriteLine($"{totalCost}.-".PadLeft(71));
+                sw.WriteLine("{0,64}{1}.{2}", string.Empty, (totalCost / 100), (totalCost % 100).ToString("00"));
 
                 // Separator
                 for (int j = 0; j < 80; j++)
@@ -194,6 +189,14 @@ namespace Schoeppli.View
                 sw.WriteLine();
 
             }
+        }
+
+        private Bestellung GetBestellung()
+        {
+            controller.GetAllBestellungen().ForEach(Console.WriteLine);
+            int bestellId = ConsoleUtils.GetUserInputAsInt("Rechnung welcher Bestellung soll erstellt werden? [Bestellnr.]: ");
+
+            return controller.GetAllBestellungen().Where(x => x.Bestellnummer == bestellId).SingleOrDefault();
         }
 
         private void PrintKeineBestellung()

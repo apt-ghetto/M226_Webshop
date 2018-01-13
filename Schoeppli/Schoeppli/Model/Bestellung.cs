@@ -32,7 +32,7 @@ namespace Schoeppli.Model
 
         public override string ToString()
         {
-            return $"BstNr: {Bestellnummer}\tKunde:{Besteller.Vorname} {Besteller.Nachname}\tDatum: {Bestelldatum.ToShortDateString()}\tStatus: {Bestellstatus}\n";
+            return $"BstNr: {Bestellnummer}\tKunde: {Besteller.Vorname} {Besteller.Nachname}\tDatum: {Bestelldatum.ToShortDateString()}\tStatus: {Bestellstatus}\n";
         }
         
     }

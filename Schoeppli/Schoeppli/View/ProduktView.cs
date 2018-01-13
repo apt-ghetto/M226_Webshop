@@ -41,11 +41,11 @@ namespace Schoeppli.View
                             break;
                         case 3:
                             ShowAll(controller.GetAllProducts());
-                            EditProduct(ConsoleUtils.GetUserInputAsInt("Welches Produkt soll bearbeitet werden? [ID]"));
+                            EditProduct(ConsoleUtils.GetUserInputAsInt("Welches Produkt soll bearbeitet werden? [ID]: "));
                             break;
                         case 4:
                             ShowAll(controller.GetAllProducts());
-                            DeleteProduct(ConsoleUtils.GetUserInputAsInt("Welches Produkt soll gelöscht werden? [ID]"));
+                            DeleteProduct(ConsoleUtils.GetUserInputAsInt("Welches Produkt soll gelöscht werden? [ID]: "));
                             break;
                         case 5:
 
@@ -139,7 +139,7 @@ namespace Schoeppli.View
                     Console.WriteLine();
                     Console.WriteLine("9) Zurück");
                     Console.WriteLine();
-                    Console.WriteLine("Welche Eigenschaft soll bearbeitet werden?");
+                    Console.WriteLine("Welche Eigenschaft soll bearbeitet werden? : ");
                     ConsoleUtils.PrintPrompt();
                     userInput = Console.ReadLine();
 
@@ -155,8 +155,8 @@ namespace Schoeppli.View
                             bearbeitetesProdukt.Kategorie = ChooseCategory();
                             break;
                         case "3":
-                            Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.Preis}");
-                            bearbeitetesProdukt.Preis = ConsoleUtils.GetUserInputAsInt("Neuer Wert: ");
+                            Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.Preis / 100}.{(bearbeitetesProdukt.Preis % 100).ToString("00")}");
+                            bearbeitetesProdukt.Preis = ConsoleUtils.GetUserInputAsInt("Neuer Wert (in Rappen): ");
                             break;
                         case "4":
                             Console.WriteLine($"Alter Wert: {bearbeitetesProdukt.Bestand}");

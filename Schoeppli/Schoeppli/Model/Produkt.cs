@@ -32,12 +32,22 @@ namespace Schoeppli.Model
 
         public override string ToString()
         {
-            return $"ID: {ID}\tBeschreibung: {Beschreibung}\tBestand: {Bestand}\n";
+            string formattedString = $"ID: {ID}".PadRight(10) +
+                $"Beschreibung: {Beschreibung}".PadRight(40) +
+                $"Bestand: {Bestand}";
+
+            return formattedString;
         }
 
         public string GetInfoAll()
         {
-            return $"Beschreibung: {Beschreibung}, Kategorie: {Kategorie}, Preis: {Preis}, Bestand: {Bestand}";
+            string formattedString = 
+                $"Beschreibung: {Beschreibung}".PadRight(40) +
+                $"Kategorie: {Kategorie}".PadRight(30) +
+                $"Preis: {Preis / 100}.{(Preis % 100).ToString("00")}".PadRight(20) +
+                $"Bestand: {Bestand}";
+
+            return formattedString;
         }
     }
 }
