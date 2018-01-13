@@ -81,11 +81,16 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Plunder\Testdaten\Bestellungen.json" />
     <None Include="Plunder\Testdaten\Kunden.json" />
+    <None Include="Plunder\Testdaten\Mitarbeiter.json" />
     <None Include="Plunder\Testdaten\Produkte.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Plunder\Pro_Memoria.txt" />
+    <Content Include="Plunder\Testdaten\Rechnungen\2018-01-13_01-46_1_Tester.txt" />
+    <Content Include="Plunder\Testdaten\Rechnungen\2018-01-13_01-46_2_Obacht.txt" />
+    <Content Include="Plunder\Testdaten\Rechnungen\2018-01-13_01-46_3_Klausen.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
