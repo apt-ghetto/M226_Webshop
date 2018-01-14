@@ -40,8 +40,6 @@ namespace Schoeppli.View
                             break;
                         case 2:
                             CreateBill();
-                            ConsoleUtils.PrintContinueMessage();
-                            Console.ReadKey();
                             break;
                         case 9:
 
@@ -93,6 +91,8 @@ namespace Schoeppli.View
                     Console.WriteLine("Rechnung erfolgreich erstellt.");
                     Console.WriteLine();
                     System.Diagnostics.Process.Start(filePath);
+                    ConsoleUtils.PrintContinueMessage();
+                    Console.ReadKey();
                 }
                 else
                 {
