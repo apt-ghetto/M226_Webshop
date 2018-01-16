@@ -49,7 +49,7 @@ namespace Schoeppli.View
                     {
                         case 1:
                             ShowAll(bController.GetAllBestellungen());
-                            ConsoleUtils.PrintContinueMessage();
+                            ShowSingle();
                             break;
                         case 2:
                             EditStatus();
@@ -73,6 +73,37 @@ namespace Schoeppli.View
                 }
             } while (input != 9);
             
+        }
+
+        public void ShowSingle()
+        {
+            do
+            {
+                Console.WriteLine();
+                Console.WriteLine("Bestelldetails ansehen? y/n");
+                ConsoleUtils.PrintPrompt();
+                if (Console.ReadLine() == "y")
+                {
+                    Console.WriteLine();
+                    int bestellNr = ConsoleUtils.GetUserInputAsInt("BestellNr: ");
+                    Bestellung bestellung = bController.GetAllBestellungen().Find(b => b.Bestellnummer == bestellNr);
+                    if (bestellung != null)
+                    {
+                        Console.WriteLine(bestellung.GetInfoAll());
+                        ListAllProducts(bestellung.BestellteArtikel);
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Bestellnummer existiert nicht!");
+                        ConsoleUtils.PrintContinueMessage();
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            } while (true);
         }
 
         public void ShowAll(List<Bestellung> bestellungen)

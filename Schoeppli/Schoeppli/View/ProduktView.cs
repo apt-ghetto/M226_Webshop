@@ -92,6 +92,7 @@ namespace Schoeppli.View
             {
                 Console.WriteLine();
                 Console.WriteLine("Artikeldetails einsehen? y/n");
+                ConsoleUtils.PrintPrompt();
                 if (Console.ReadLine() == "y")
                 {
                     Console.WriteLine();

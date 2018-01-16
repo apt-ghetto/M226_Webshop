@@ -11,5 +11,7 @@ namespace Schoeppli.Interface
     public interface ISubView<T> : IView
     {
         void ShowAll(List<T> items);
+
+        void ShowSingle();
     }
 }
