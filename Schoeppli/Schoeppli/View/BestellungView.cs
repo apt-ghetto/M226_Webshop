@@ -10,12 +10,14 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.View
 {
+    // Klasse für die Bestellungsverwaltung
     public class BestellungView : ISubView<Bestellung>
     {
         private BestellungController bController;
         private PersonController pController;
         private ProduktController aController;
 
+        // Konstruktor mit allen benötigten Controlern
         public BestellungView(BestellungController controller, PersonController pController, ProduktController aController)
         {
             this.bController = controller;
@@ -23,6 +25,7 @@ namespace Schoeppli.View
             this.aController = aController;
         }
 
+        // Anzeigen des Menüs für den Benutzer
         public void ShowMenu()
         {
             Console.WriteLine("1) Alle Bestellungen anzeigen");
@@ -34,6 +37,7 @@ namespace Schoeppli.View
             Console.WriteLine();
         }
 
+        // Einstiegspunkt in die Bestellverwaltung
         public void ShowView()
         {
             byte input;
@@ -75,6 +79,7 @@ namespace Schoeppli.View
             
         }
 
+
         public void ShowSingle()
         {
             do
@@ -106,6 +111,8 @@ namespace Schoeppli.View
             } while (true);
         }
 
+
+        // Anzeigen aller Bestellungen
         public void ShowAll(List<Bestellung> bestellungen)
         {
             ConsoleUtils.PrintTitle();
@@ -113,6 +120,7 @@ namespace Schoeppli.View
             Console.WriteLine();
         }
 
+        // Bearbeiten des Status einer Bestellung
         private void EditStatus()
         {
             Bestellung bestellung = GetBestellung();
@@ -132,11 +140,13 @@ namespace Schoeppli.View
             }
         }
 
+        // Neue Bestellung erstellen
         private void NewBestellung()
         {
             ConsoleUtils.PrintTitle();
             Kunde kunde;
             
+            // Kunde auswählen
             do
             {
                 kunde = GetKunde();
@@ -148,19 +158,25 @@ namespace Schoeppli.View
             } while (kunde == null);
 
             DateTime datum = DateTime.Now;
+
+            // Subroutine zur Auswahl der Artikel
             List<ArtikelBestellung> bestellteArtikel = GetBestellteArtikel();
 
             Bestellung bestellung = new Bestellung(-1, kunde, datum, Bestellstatus.Eingegangen);
             bestellung.BestellteArtikel = bestellteArtikel;
             Console.WriteLine(bestellung.GetInfoAll());
+            // Dem Benutzer eine Übersicht der zu bestellenden Artikel geben
             ListAllProducts(bestellteArtikel);
             Console.WriteLine();
             ConsoleUtils.PrintSaveTemporary();
             if (Console.ReadLine() == "y")
             {
+                // Bestellung speichern
                 bController.SaveNewBestellung(bestellung);
                 bool bestandTief = false;
                 Console.WriteLine();
+
+                // Bestand anpassen und überprüfen, ob der kritische Lagerbestand erreicht ist
                 foreach (ArtikelBestellung position in bestellung.BestellteArtikel)
                 {
                     Produkt artikel = aController.GetAllProducts().Find(p => p.ID == position.Artikelnummer);
@@ -178,6 +194,7 @@ namespace Schoeppli.View
             }
         }
 
+        // Bestellung löschen
         private void DeleteBestellung()
         {
             Bestellung bestellung = GetBestellung();
@@ -202,6 +219,7 @@ namespace Schoeppli.View
             }
         }
 
+        // Subroutine zur Auswahl eines Status
         private Bestellstatus ChooseStatus()
         {
             foreach(Bestellstatus stat in Enum.GetValues(typeof(Bestellstatus)))
@@ -224,6 +242,7 @@ namespace Schoeppli.View
             } while (true);
         }
 
+        // Subroutine zur Auswahl einer Bestellung
         private Bestellung GetBestellung()
         {
             ShowAll(bController.GetAllBestellungen());
@@ -232,6 +251,7 @@ namespace Schoeppli.View
             return bController.GetAllBestellungen().Where(x => x.Bestellnummer == bestellId).SingleOrDefault();
         }
         
+        // Subroutine zur Auswahl eines Kunden
         private Kunde GetKunde()
         {
             ConsoleUtils.PrintTitle();
@@ -242,6 +262,7 @@ namespace Schoeppli.View
             return pController.GetAllKunden().Where(x => x.ID == kundenId).SingleOrDefault();
         }
 
+        // Subroutine zur Auswahl der Artikel, welche bestellt werden sollen
         private List<ArtikelBestellung> GetBestellteArtikel()
         {
             List<ArtikelBestellung> bestellteArtikel = new List<ArtikelBestellung>();
@@ -253,6 +274,7 @@ namespace Schoeppli.View
                 aController.GetAllProducts().ForEach(Console.WriteLine);
                 Console.WriteLine();
 
+                // Artikel wählen
                 int artikelId = ConsoleUtils.GetUserInputAsInt("Welcher Artikel? [ID]: ");
                 Produkt artikel = aController.GetAllProducts().Where(x => x.ID == artikelId).SingleOrDefault();
                 if (artikel == null)
@@ -262,6 +284,7 @@ namespace Schoeppli.View
                     continue;
                 }
 
+                // Anzahl des Artikels wählen
                 int anzahl = ConsoleUtils.GetUserInputAsInt("Anzahl: ");
                 if (artikel.Bestand < anzahl || anzahl < 0)
                 {
@@ -276,6 +299,8 @@ namespace Schoeppli.View
                 {
                     bestellteArtikel.Add(new ArtikelBestellung(artikelId, anzahl));
                 }
+
+                // Nachfragen, ob weitere Artikel hinzugefügt werden wollen
                 Console.WriteLine("Weiteren Artikel hinzufügen? y/n");
                 ConsoleUtils.PrintPrompt();
                 if (Console.ReadLine() == "n")
@@ -287,6 +312,7 @@ namespace Schoeppli.View
             return bestellteArtikel;
         }
 
+        // Subroutine zum anzeigen aller Artikel, die für die Bestellung ausgewählt wurden inkl. Anzahl
         private void ListAllProducts(List<ArtikelBestellung> artikelListe)
         {
             foreach (ArtikelBestellung position in artikelListe)
@@ -296,6 +322,7 @@ namespace Schoeppli.View
             }
         }
 
+        // Anzeigen einer Warnmeldung, falls eine ungültige Bestellung ausgewählt wurde
         private void PrintKeineBestellung()
         {
             Console.WriteLine("Bestellung existiert nicht!");

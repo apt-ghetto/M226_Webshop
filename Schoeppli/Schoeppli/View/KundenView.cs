@@ -10,15 +10,18 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.View
 {
+    // Klasse für die Interaktion mit der Kundenverwaltung
     public class KundenView : ISubView<Kunde>
     {
         private PersonController controller;
 
+        // Konstruktor
         public KundenView(PersonController controller)
         {
             this.controller = controller;
         }
                
+        // Anzeigen des Menüs für den Benutzer
         public void ShowMenu()
         {
             Console.WriteLine("1) Alle Kunden anzeigen");
@@ -30,6 +33,7 @@ namespace Schoeppli.View
             Console.WriteLine();
         }
 
+        // Einstiegspunkt für die Interaktion
         public void ShowView()
         {
             byte input;
@@ -70,12 +74,14 @@ namespace Schoeppli.View
             } while (input != 9);
         }
 
+        // Alle Kunden anzeigen
         public void ShowAll(List<Kunde> kunden)
         {
             ConsoleUtils.PrintTitle();
             kunden.ForEach(Console.WriteLine);
         }
 
+        // Ein einzelner Kunde mit allen Details anzeigen
         public void ShowSingle()
         {
             do
@@ -105,6 +111,7 @@ namespace Schoeppli.View
             } while (true);
         }
 
+        // Einen Kunden bearbeiten
         public void EditKunde()
         {
             Kunde kunde = GetKunde();            
@@ -182,6 +189,7 @@ namespace Schoeppli.View
             }
         }
 
+        // Einen neuen Kunden hinzufügen
         private void NewKunde()
         {
             ConsoleUtils.PrintTitle();
@@ -213,6 +221,7 @@ namespace Schoeppli.View
             }
         }
 
+        // Einen Kunden löschen
         private void DeleteKunde()
         {
             Kunde kunde = GetKunde();
@@ -231,6 +240,8 @@ namespace Schoeppli.View
             }
         }
 
+        // Helfermethode für die Angabe eines Geburtstags durch den Benutzer (fehleranfällig)
+        // Der Benutzer ist fehleranfällig... nicht die Methode
         private DateTime GetGeburtstag()
         {
             while (true)
@@ -260,6 +271,7 @@ namespace Schoeppli.View
             }
         }
 
+        // Helfermethode für die Auswahl eines Kunden
         private Kunde GetKunde()
         {
             ShowAll(controller.GetAllKunden());
@@ -268,6 +280,7 @@ namespace Schoeppli.View
             return controller.GetAllKunden().Where(x => x.ID == kundenId).SingleOrDefault();
         }
 
+        // Anzeigen einer Warnmeldung bei nicht existierendem Kunden
         private void PrintKeinKunde()
         {
             Console.WriteLine("Kunde existiert nicht!");

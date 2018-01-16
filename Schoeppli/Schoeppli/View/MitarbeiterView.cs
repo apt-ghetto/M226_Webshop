@@ -11,15 +11,18 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.View
 {
+    // Klasse für die Interaktion mit der Mitarbeiterverwaltung
     public class MitarbeiterView : ISubView<Mitarbeiter>
     {
         private PersonController controller;
 
+        // Konstruktor
         public MitarbeiterView(PersonController controller)
         {
             this.controller = controller;
         }
 
+        // Anzeigen des Menüs für den Benutzer
         public void ShowMenu()
         {
             Console.WriteLine("1) Alle Mitarbeiter anzeigen");
@@ -32,6 +35,7 @@ namespace Schoeppli.View
             Console.WriteLine();
         }
 
+        // Einstiegspunkt für die Interaktion
         public void ShowView()
         {
             byte input;
@@ -75,12 +79,14 @@ namespace Schoeppli.View
             } while (input != 9);
         }
 
+        // Anzeigen aller Mitarbeiter
         public void ShowAll(List<Mitarbeiter> mitarbeiter)
         {
             ConsoleUtils.PrintTitle();
             mitarbeiter.ForEach(Console.WriteLine);
         }
 
+        // Anzeigen eines einzelnen Mitarbeiters
         public void ShowSingle()
         {
             do
@@ -110,6 +116,7 @@ namespace Schoeppli.View
             } while (true);
         }
 
+        // Bearbeiten des Status eines Mitarbeiters
         private void EditStatus()
         {
             Mitarbeiter mitarbeiter = GetMitarbeiter();
@@ -129,6 +136,7 @@ namespace Schoeppli.View
             }
         }
 
+        // Bearbeiten der Abteilung eines Mitarbeiters
         private void EditAbteilung()
         {
             Mitarbeiter mitarbeiter = GetMitarbeiter();
@@ -149,6 +157,7 @@ namespace Schoeppli.View
             }
         }
 
+        // Neuen Mitarbeiter erstellen
         private void NewMitarbeiter()
         {
             ConsoleUtils.PrintTitle();
@@ -176,6 +185,7 @@ namespace Schoeppli.View
                 geburtsdatum, adresse, plz, abteilung, lohn, status);
 
             Console.WriteLine();
+            // Zu erstellenden Mitarbeiter zur Übersicht noch einmal anzeigen
             Console.WriteLine(mitarbeiter.GetInfoAll());
             Console.WriteLine();
             ConsoleUtils.PrintSaveTemporary();
@@ -185,6 +195,7 @@ namespace Schoeppli.View
             }
         }
 
+        // Mitarbeiter löschen
         private void DeleteMitarbeiter()
         {
             Mitarbeiter mitarbeiter = GetMitarbeiter();
@@ -203,6 +214,7 @@ namespace Schoeppli.View
             }
         }
 
+        // Helfermethode zur Auswahl des Geburtstags durch den Benutzer
         private DateTime GetGeburtstag()
         {
             while (true)
@@ -232,6 +244,7 @@ namespace Schoeppli.View
             }
         }
 
+        // Helfermethode zur Auswahl einer Abteilung
         private Abteilung ChooseAbteilung()
         {
             foreach(Abteilung abt in Enum.GetValues(typeof(Abteilung)))
@@ -257,6 +270,7 @@ namespace Schoeppli.View
             } while (true);
         }
 
+        // Helfermethode zur Auswahl eines Status
         private Status ChooseStatus()
         {
             foreach (Status stat in Enum.GetValues(typeof(Status)))
@@ -282,6 +296,7 @@ namespace Schoeppli.View
             } while (true);
         }
 
+        // Helfermethode zur Auswahl eines Mitarbeiters
         private Mitarbeiter GetMitarbeiter()
         {
             ShowAll(controller.GetAllMitarbeiter());
@@ -290,6 +305,7 @@ namespace Schoeppli.View
             return controller.GetAllMitarbeiter().Where(x => x.ID == mitarbeiterId).SingleOrDefault();
         }
 
+        // Warnmeldung bei nicht existierendem Mitarbeiter
         private void PrintKeinMitarbeiter()
         {
             Console.WriteLine("Mitarbeiter existiert nicht!");

@@ -10,17 +10,20 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.View
 {
+    // Klasse zur Interaktion mit dem Rechnungsmanagement
     public class RechnungsView : IView
     {
         private BestellungController controller;
         private ProduktController pController;
 
+        // Konstruktor
         public RechnungsView(BestellungController controller, ProduktController pController)
         {
             this.controller = controller;
             this.pController = pController;
         }
 
+        // Einstiegspunkt für die Interaktion
         public void ShowView()
         {
             byte input;
@@ -55,6 +58,7 @@ namespace Schoeppli.View
             } while (input != 9);
         }
 
+        // Anzeigen des Menüs für den Benutzer
         public void ShowMenu()
         {
             Console.WriteLine("1) Rechnung anzeigen");
@@ -64,6 +68,7 @@ namespace Schoeppli.View
             Console.WriteLine();
         }
 
+        // Anzeigen aller Rechnungen direkt aus dem Rechnungsordner
         public void ShowAll()
         {
             int counter = 0;
@@ -76,6 +81,7 @@ namespace Schoeppli.View
             Console.WriteLine();
         }
 
+        // Neue Rechnung erstellen
         private void CreateBill()
         {
             ConsoleUtils.PrintTitle();
@@ -103,6 +109,7 @@ namespace Schoeppli.View
             }
         }
 
+        // File für Rechnung erstellen und Text einfügen
         private void WriteFile(Bestellung bestellung, string filePath)
         {
             int totalCost = 0;
@@ -189,6 +196,7 @@ namespace Schoeppli.View
             }
         }
 
+        // Helfermethode zur Auswahl einer Bestellung
         private Bestellung GetBestellung()
         {
             controller.GetAllBestellungen().ForEach(Console.WriteLine);
@@ -197,12 +205,14 @@ namespace Schoeppli.View
             return controller.GetAllBestellungen().Where(x => x.Bestellnummer == bestellId).SingleOrDefault();
         }
 
+        // Warnmeldung bei nicht existierender Bestellung
         private void PrintKeineBestellung()
         {
             Console.WriteLine("Bestellung existiert nicht!");
             ConsoleUtils.PrintContinueMessage();
         }
 
+        // Warnmeldung bei bereits vorhandener Rechnung
         private void PrintRechnungVorhanden()
         {
             Console.WriteLine("Rechnung existiert bereits!");
