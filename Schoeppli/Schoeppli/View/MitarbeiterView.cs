@@ -93,6 +93,7 @@ namespace Schoeppli.View
             {
                 Console.WriteLine();
                 Console.WriteLine("Mitarbeiter Details einsehen? y/n");
+                ConsoleUtils.PrintPrompt();
                 if (Console.ReadLine() == "y")
                 {
                     Console.WriteLine();
