@@ -129,6 +129,7 @@ namespace Schoeppli.View
             {
                 bController.SaveNewBestellung(bestellung);
                 bool bestandTief = false;
+                Console.WriteLine();
                 foreach (ArtikelBestellung position in bestellung.BestellteArtikel)
                 {
                     Produkt artikel = aController.GetAllProducts().Find(p => p.ID == position.Artikelnummer);
@@ -138,10 +139,10 @@ namespace Schoeppli.View
                         Console.WriteLine($"Achtung! Bestand von {artikel.Beschreibung} ist tief: {artikel.Bestand}!");
                         bestandTief = true;
                     }
-                    if (bestandTief)
-                    {
-                        ConsoleUtils.PrintContinueMessage();
-                    }
+                }
+                if (bestandTief)
+                {
+                    ConsoleUtils.PrintContinueMessage();
                 }
             }
         }
