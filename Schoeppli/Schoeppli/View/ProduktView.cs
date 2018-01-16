@@ -33,7 +33,7 @@ namespace Schoeppli.View
                     {
                         case 1:
                             ShowAll(controller.GetAllProducts());
-                            ConsoleUtils.PrintContinueMessage();
+                            ShowSingle();
                             break;
                         case 2:
                             NewProduct();
@@ -82,8 +82,36 @@ namespace Schoeppli.View
             {
                 produkte.ForEach(Console.WriteLine);
             }            
-            Console.WriteLine();
         }
+
+        public void ShowSingle()
+        {
+            do
+            {
+                Console.WriteLine();
+                Console.WriteLine("Artikeldetails einsehen? y/n");
+                if (Console.ReadLine() == "y")
+                {
+                    Console.WriteLine();
+                    int artikelID = ConsoleUtils.GetUserInputAsInt("Artikel ID: ");
+                    Produkt produkt = controller.GetAllProducts().Find(i => i.ID == artikelID);
+                    if (produkt != null)
+                    {
+                        Console.WriteLine(produkt.GetInfoAll());
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Artikel existiert nicht!");
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            } while (true);
+        }
+
 
         private void NewProduct()
         {
