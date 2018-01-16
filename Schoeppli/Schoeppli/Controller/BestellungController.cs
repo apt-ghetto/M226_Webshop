@@ -16,11 +16,13 @@ namespace Schoeppli.Controller
         private static string bestellPath = @"C:\_Database\Bestellungen.json";
         private static string rechnungPath = @"C:\_Database\Rechnungen\";
 
+        // Konstruktor
         public BestellungController()
         {
             ReadData();
         }
         
+        // Daten aus File lesen
         public void ReadData()
         {
             alleBestellungen = DataAccess<Bestellung>.ReadFromFile(bestellPath);
@@ -30,21 +32,25 @@ namespace Schoeppli.Controller
             }
         }
 
+        // Daten in File schreiben
         public void WriteData()
         {
             DataAccess<Bestellung>.WriteToFile(alleBestellungen, bestellPath);
         }
 
+        // Alle Bestellungen auslesen
         public List<Bestellung> GetAllBestellungen()
         {
             return alleBestellungen;
         }
 
+        // Alle Rechnungen auslesen
         public string[] GetAllBills()
         {
             return Directory.GetFiles(rechnungPath);
         }
 
+        // Neue Bestellung zur Liste hinzufügen
         public void SaveNewBestellung(Bestellung nigelnagelneueBestellung)
         {
             nigelnagelneueBestellung.Bestellnummer = alleBestellungen.Count == 0 ?
@@ -54,6 +60,7 @@ namespace Schoeppli.Controller
             alleBestellungen.Add(nigelnagelneueBestellung);
         }
 
+        // Neue Rechnung als Datei erstellen
         public string CreateFileNewRechnung(Bestellung nigelnagelneueBestellung)
         {
             string returnString = string.Empty;

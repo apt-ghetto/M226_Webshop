@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.Model
 {
+    // Model für Bestellungen mit einem Artikel und der Anzahl, die bestellt wurde
     public class ArtikelBestellung
     {
         public int Artikelnummer { get; set; }

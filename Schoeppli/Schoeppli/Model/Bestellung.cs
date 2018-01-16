@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.Model
 {
+    // Model für Bestellungen
     public class Bestellung : IModel
     {
         public int Bestellnummer { get; set; }
@@ -16,6 +17,7 @@ namespace Schoeppli.Model
         public Bestellstatus Bestellstatus { get; set; }
         public List<ArtikelBestellung> BestellteArtikel { get; set; }
 
+        // Konstruktor
         public Bestellung(int bestellnummer, Kunde besteller, DateTime bestelldatum, Bestellstatus bestellstatus)
         {
             Bestellnummer = bestellnummer;
@@ -25,11 +27,13 @@ namespace Schoeppli.Model
             BestellteArtikel = new List<ArtikelBestellung>();
         }
 
+        // Alle Infos zu einer Bestellung auslesen
         public string GetInfoAll()
         {
             return $"Besteller: {Besteller.Vorname} {Besteller.Nachname}, Bestelldatum: {Bestelldatum.ToShortDateString()}, Bestellstatus: {Bestellstatus}";
         }
 
+        // Override ToString für schönere Darstellung
         public override string ToString()
         {
             return $"BstNr: {Bestellnummer}\tKunde: {Besteller.Vorname} {Besteller.Nachname}\tDatum: {Bestelldatum.ToShortDateString()}\tStatus: {Bestellstatus}\n";

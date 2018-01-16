@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.Interface
 {
+    // Interface für Klassen, welche ein Model darstellen
     public interface IModel
     {
+        // Alle Eigenschaften des Models anzeigen (in Konsole schreiben)
         string GetInfoAll();
     }
 }

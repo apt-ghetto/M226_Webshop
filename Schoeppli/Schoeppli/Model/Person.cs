@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.Model
 {
+    // Model für Personen (Parentklasse)
     public abstract class Person : IModel
     {
         public int ID { get; set; }
@@ -26,6 +27,7 @@ namespace Schoeppli.Model
             PLZ = plz;
         }
 
+        // Override ToString für schönere Darstellung
         public override string ToString()
         {
             string formattedString = $"ID: {ID}".PadRight(10) +
@@ -35,6 +37,7 @@ namespace Schoeppli.Model
             return formattedString;
         }
 
+        // Alle Infos einer Person auslesen
         public virtual string GetInfoAll()
         {
             return $"Vorname: {Vorname}, Nachname: {Nachname}, Geburtsdatum: {Geburtsdatum.ToShortDateString()}, Adresse: {Adresse}, PLZ: {PLZ}";

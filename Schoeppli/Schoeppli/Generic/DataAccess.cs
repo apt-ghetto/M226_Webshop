@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.Generic
 {
+    // Generische Klasse für Datenzugriff auf Files
     public class DataAccess<T>
     {
-
+        // Liste von Objekten in ein File schreiben und ablegen
         public static void WriteToFile(List<T> allObjects, string filePath)
         {
             using (StreamWriter file = File.CreateText(filePath))
@@ -21,10 +22,12 @@ namespace Schoeppli.Generic
             }
         }
 
+        // Daten aus einem File lesen und in eine Liste von Objekten abfüllen
         public static List<T> ReadFromFile(string filePath)
         {
             List<T> allObjects = new List<T>();
 
+            // Exception Handling
             try
             {
                 using (StreamReader reader = new StreamReader(filePath))

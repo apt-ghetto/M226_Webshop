@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.Model
 {
+    // Model für Kunden
+    // Childklasse zu Person
     public class Kunde : Person
     {
 
@@ -15,7 +17,8 @@ namespace Schoeppli.Model
         {
             Kundennummer = kundennummer;
         }
-       
+
+        // Alle Infos zu eines Kunden auslesen
         public override string GetInfoAll()
         {
             string info =  base.GetInfoAll();

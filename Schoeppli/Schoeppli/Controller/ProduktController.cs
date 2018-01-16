@@ -15,26 +15,31 @@ namespace Schoeppli.Controller
         private static string filePath = @"C:\_Database\Produkte.json";
         List<Produkt> alleProdukte;
 
+        // Konstruktor
         public ProduktController()
         {
             ReadData();
         }
 
+        // Daten in File schreiben
         public void WriteData()
         {
             DataAccess<Produkt>.WriteToFile(alleProdukte, filePath);
         }
 
+        // Daten aus File lesen
         public void ReadData()
         {
             alleProdukte = DataAccess<Produkt>.ReadFromFile(filePath);
         }
 
+        // Alle Produkte auslesen
         public List<Produkt> GetAllProducts()
         {
             return alleProdukte;
         }
 
+        // Neues Produkt in Liste speichern
         public void SaveNewProduct(Produkt nigelnagelneuesProdukt)
         {
             if (alleProdukte != null)

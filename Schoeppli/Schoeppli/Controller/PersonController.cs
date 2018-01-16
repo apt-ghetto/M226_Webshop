@@ -19,17 +19,20 @@ namespace Schoeppli.Controller
         List<Kunde> alleKunden;
         List<Mitarbeiter> alleMitarbeiter;
 
+        // Konstruktor
         public PersonController()
         {
             ReadData();
         }
 
+        // Daten in File schreiben
         public void WriteData()
         {
             DataAccess<Kunde>.WriteToFile(alleKunden, kundenFilePath);
             DataAccess<Mitarbeiter>.WriteToFile(alleMitarbeiter, mitarbeiterFilePath);
         }
 
+        // Daten aus File lesen
         public void ReadData()
         {
             alleKunden = DataAccess<Kunde>.ReadFromFile(kundenFilePath);
@@ -45,17 +48,20 @@ namespace Schoeppli.Controller
             }
         }
 
+        // Alle Mitarbeiter auslesen
         public List<Mitarbeiter> GetAllMitarbeiter()
         {
             return alleMitarbeiter;
         }
 
+        // Alle Kunden auslesen
         public List<Kunde> GetAllKunden()
         {
             return alleKunden;
 
         }
 
+        // Neuen Mitarbeiter zur Liste hinzufügen
         public void SaveNewMitarbeiter(Mitarbeiter nigelnagelneuerMitarbeiter)
         {
             nigelnagelneuerMitarbeiter.ID = alleMitarbeiter.Count == 0 ?
@@ -65,6 +71,7 @@ namespace Schoeppli.Controller
             alleMitarbeiter.Add(nigelnagelneuerMitarbeiter);
         }
 
+        // Neuen Kunden zur Liste hinzufügen
         public void SaveNewKunde(Kunde nigelnagelneuerKunde)
         {
             nigelnagelneuerKunde.ID = alleKunden.Count == 0 ?

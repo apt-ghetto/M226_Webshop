@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.Model.Enumerator
 {
+    // Enumerator für Status von Mitarbeiter
     public enum Status
     {
         Anwesend,

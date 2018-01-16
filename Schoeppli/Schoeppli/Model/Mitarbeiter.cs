@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.Model
 {
+    // Model für Mitarbeiter
+    // Childklasse zu Person
     public class Mitarbeiter : Person
     {
         public Abteilung Abteilung { get; set; }
@@ -21,12 +23,14 @@ namespace Schoeppli.Model
             Status = status;
         }
 
+        // Alle Infos eines Mitarbeiters auslesen
         public override string GetInfoAll()
         {
             string info = base.GetInfoAll();
             return info + $", Abteilung: {Abteilung}, Lohn: {Lohn}.-, Status: {Status}";
         }
 
+        // Override ToString für schönere Darstellung
         public override string ToString()
         {
             string formattedString = $"ID: {ID}".PadRight(10) +

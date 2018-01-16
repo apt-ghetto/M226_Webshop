@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.Model.Enumerator
 {
+    // Enumerator für Kategorien von Produkten
     public enum Kategorie
     {
         Obst,
