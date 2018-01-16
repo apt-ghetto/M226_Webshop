@@ -79,7 +79,6 @@ namespace Schoeppli.View
         {
             ConsoleUtils.PrintTitle();
             mitarbeiter.ForEach(Console.WriteLine);
-            Console.WriteLine();
         }
 
         public void ShowSingle()
@@ -92,7 +91,7 @@ namespace Schoeppli.View
                 {
                     Console.WriteLine();
                     int mitarbeiterID = ConsoleUtils.GetUserInputAsInt("Mitarbeiter ID: ");
-                    Person mitarbeiter = controller.GetAllMitarbeiter().Where(i => i.ID == mitarbeiterID).Single();
+                    Person mitarbeiter = controller.GetAllMitarbeiter().Find(i => i.ID == mitarbeiterID);
                     if (mitarbeiter != null)
                     {
                         Console.WriteLine(mitarbeiter.GetInfoAll());

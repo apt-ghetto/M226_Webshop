@@ -47,7 +47,8 @@ namespace Schoeppli.View
                             DeleteProduct(ConsoleUtils.GetUserInputAsInt("Welches Produkt soll gelöscht werden? [ID]: "));
                             break;
                         case 5:
-
+                            ShowLager(controller.GetAllProducts());
+                            ConsoleUtils.PrintContinueMessage();
                             break;
                         case 9:
 
@@ -70,6 +71,7 @@ namespace Schoeppli.View
             Console.WriteLine("2) Neues Produkt erstellen");
             Console.WriteLine("3) Produkt bearbeiten");
             Console.WriteLine("4) Produkt löschen");
+            Console.WriteLine("5) Lagerbestand aufzeigen");
             Console.WriteLine();
             Console.WriteLine("9) Zurück");
             Console.WriteLine();
@@ -112,6 +114,30 @@ namespace Schoeppli.View
             } while (true);
         }
 
+        public void ShowLager(List<Produkt> produkte)
+        {
+            ConsoleUtils.PrintTitle();
+            if (produkte != null)
+            {
+                int totalLagerbestand = 0;
+                int totalLagerwert = 0;
+
+                foreach (Produkt produkt in produkte)
+                {
+                    totalLagerbestand += produkt.Bestand;
+                    totalLagerwert += produkt.Bestand * produkt.Preis;
+                }
+
+                Console.WriteLine($"Totaler Lagerbestand: {totalLagerbestand}");
+                Console.WriteLine($"Totaler Lagerwert: {totalLagerwert / 100}.{totalLagerwert % 100}");
+                Console.WriteLine($"Für Bestand pro Artikel bitte \"Alle Artikel anzeigen\" verwenden");
+            }
+            else
+            {
+                Console.WriteLine("Keine Produkte vorhanden.");
+            }
+            Console.WriteLine();
+        }
 
         private void NewProduct()
         {
