@@ -27,6 +27,7 @@ namespace Schoeppli.View
         public static void PrintContinueMessage()
         {
             Console.Write("Beliebige Taste drücken...");
+            Console.ReadKey();
         }
 
         public static void PrintSaveTemporary()

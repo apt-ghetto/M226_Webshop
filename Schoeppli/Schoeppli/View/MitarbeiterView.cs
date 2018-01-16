@@ -48,7 +48,6 @@ namespace Schoeppli.View
                         case 1:
                             ShowAll(controller.GetAllMitarbeiter());
                             ConsoleUtils.PrintContinueMessage();
-                            Console.ReadKey();
                             break;
                         case 2:
                             EditStatus();
@@ -267,7 +266,6 @@ namespace Schoeppli.View
         {
             Console.WriteLine("Mitarbeiter existiert nicht!");
             ConsoleUtils.PrintContinueMessage();
-            Console.ReadKey();
         }
     }
 }

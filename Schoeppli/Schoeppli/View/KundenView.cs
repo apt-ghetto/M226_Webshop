@@ -46,7 +46,6 @@ namespace Schoeppli.View
                         case 1:
                             ShowAll(controller.GetAllKunden());
                             ConsoleUtils.PrintContinueMessage();
-                            Console.ReadKey();
                             break;
                         case 2:
                             EditKunde();
@@ -245,7 +244,6 @@ namespace Schoeppli.View
         {
             Console.WriteLine("Kunde existiert nicht!");
             ConsoleUtils.PrintContinueMessage();
-            Console.ReadKey();
         }
     }
 }

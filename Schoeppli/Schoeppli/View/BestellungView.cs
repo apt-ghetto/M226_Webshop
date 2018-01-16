@@ -50,7 +50,6 @@ namespace Schoeppli.View
                         case 1:
                             ShowAll(bController.GetAllBestellungen());
                             ConsoleUtils.PrintContinueMessage();
-                            Console.ReadKey();
                             break;
                         case 2:
                             EditStatus();
@@ -114,7 +113,6 @@ namespace Schoeppli.View
                 {
                     ConsoleUtils.PrintInvalidMessage();
                     ConsoleUtils.PrintContinueMessage();
-                    Console.ReadKey();
                 }
             } while (kunde == null);
 
@@ -130,9 +128,20 @@ namespace Schoeppli.View
             if (Console.ReadLine() == "y")
             {
                 bController.SaveNewBestellung(bestellung);
+                bool bestandTief = false;
                 foreach (ArtikelBestellung position in bestellung.BestellteArtikel)
                 {
-                    aController.GetAllProducts().Find(p => p.ID == position.Artikelnummer).Bestand -= position.Anzahl;
+                    Produkt artikel = aController.GetAllProducts().Find(p => p.ID == position.Artikelnummer);
+                    artikel.Bestand -= position.Anzahl;
+                    if (artikel.Bestand <= Produkt.WarnungBestand)
+                    {
+                        Console.WriteLine($"Achtung! Bestand von {artikel.Beschreibung} ist tief: {artikel.Bestand}!");
+                        bestandTief = true;
+                    }
+                    if (bestandTief)
+                    {
+                        ConsoleUtils.PrintContinueMessage();
+                    }
                 }
             }
         }
@@ -158,7 +167,6 @@ namespace Schoeppli.View
             {
                 ConsoleUtils.PrintInvalidMessage();
                 ConsoleUtils.PrintContinueMessage();
-                Console.ReadKey();
             }
         }
 
@@ -219,7 +227,6 @@ namespace Schoeppli.View
                 {
                     ConsoleUtils.PrintInvalidMessage();
                     ConsoleUtils.PrintContinueMessage();
-                    Console.ReadKey();
                     continue;
                 }
 
@@ -228,7 +235,6 @@ namespace Schoeppli.View
                 {
                     Console.WriteLine("Nicht genügend Artikel vorhanden oder Anzahl negativ.");
                     ConsoleUtils.PrintContinueMessage();
-                    Console.ReadKey();
                     continue;
                 }
 
@@ -262,7 +268,6 @@ namespace Schoeppli.View
         {
             Console.WriteLine("Bestellung existiert nicht!");
             ConsoleUtils.PrintContinueMessage();
-            Console.ReadKey();
         }
     }
 }

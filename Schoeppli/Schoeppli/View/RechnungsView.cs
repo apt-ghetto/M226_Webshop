@@ -36,7 +36,6 @@ namespace Schoeppli.View
                         case 1:
                             ShowAll();
                             ConsoleUtils.PrintContinueMessage();
-                            Console.ReadKey();
                             break;
                         case 2:
                             CreateBill();
@@ -92,7 +91,6 @@ namespace Schoeppli.View
                     Console.WriteLine();
                     System.Diagnostics.Process.Start(filePath);
                     ConsoleUtils.PrintContinueMessage();
-                    Console.ReadKey();
                 }
                 else
                 {
@@ -203,14 +201,12 @@ namespace Schoeppli.View
         {
             Console.WriteLine("Bestellung existiert nicht!");
             ConsoleUtils.PrintContinueMessage();
-            Console.ReadKey();
         }
 
         private void PrintRechnungVorhanden()
         {
             Console.WriteLine("Rechnung existiert bereits!");
             ConsoleUtils.PrintContinueMessage();
-            Console.ReadKey();
         }
 
     }

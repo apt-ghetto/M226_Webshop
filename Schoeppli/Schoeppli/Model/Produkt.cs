@@ -16,6 +16,8 @@ namespace Schoeppli.Model
         public int Preis { get; set; }
         public int Bestand { get; set; }
 
+        public static int WarnungBestand = 10;
+
         public Produkt()
         {
             // do not delete

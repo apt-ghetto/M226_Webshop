@@ -34,7 +34,6 @@ namespace Schoeppli.View
                         case 1:
                             ShowAll(controller.GetAllProducts());
                             ConsoleUtils.PrintContinueMessage();
-                            Console.ReadKey();
                             break;
                         case 2:
                             NewProduct();
@@ -176,7 +175,6 @@ namespace Schoeppli.View
             {
                 Console.WriteLine("Produkt existiert nicht");
                 ConsoleUtils.PrintContinueMessage();
-                Console.ReadKey();
             }
         }
 
@@ -198,7 +196,6 @@ namespace Schoeppli.View
             {
                 Console.WriteLine("Produkt existiert nicht");
                 ConsoleUtils.PrintContinueMessage();
-                Console.ReadKey();
             }
         }
 
