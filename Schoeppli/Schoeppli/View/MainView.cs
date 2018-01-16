@@ -8,12 +8,14 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.View
 {
+    // Klasse für die Interaktion mit dem Hauptmenü der Applikation
     public class MainView : IView
     {
         private PersonController personenCtrl;
         private ProduktController produktCtrl;
         private BestellungController bestellCtrl;
 
+        // Konstruktor
         public MainView()
         {
             personenCtrl = new PersonController();
@@ -21,6 +23,7 @@ namespace Schoeppli.View
             bestellCtrl = new BestellungController();
         }
 
+        // Einstiegspunkt für die Interaktion
         public void ShowView()
         {
             byte input;            
@@ -72,6 +75,7 @@ namespace Schoeppli.View
             } while (input != 9 && input != 8);
         }
 
+        // Anzeigen des Menüs für den Benutzer
         public void ShowMenu()
         {
             Console.WriteLine("1) Mitarbeiterverwaltung");
