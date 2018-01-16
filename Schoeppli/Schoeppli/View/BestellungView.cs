@@ -157,6 +157,8 @@ namespace Schoeppli.View
             else
             {
                 ConsoleUtils.PrintInvalidMessage();
+                ConsoleUtils.PrintContinueMessage();
+                Console.ReadKey();
             }
         }
 
