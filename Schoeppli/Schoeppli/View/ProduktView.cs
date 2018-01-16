@@ -53,6 +53,10 @@ namespace Schoeppli.View
                             ShowLager(controller.GetAllProducts());
                             ConsoleUtils.PrintContinueMessage();
                             break;
+                        case 6:
+                            ShowLowProducts(controller.GetAllProducts());
+                            ConsoleUtils.PrintContinueMessage();
+                            break;
                         case 9:
 
                             break;
@@ -76,6 +80,7 @@ namespace Schoeppli.View
             Console.WriteLine("3) Produkt bearbeiten");
             Console.WriteLine("4) Produkt löschen");
             Console.WriteLine("5) Lagerbestand aufzeigen");
+            Console.WriteLine("6) Produkte mit zu niedrigem Lagerbestand anzeigen");
             Console.WriteLine();
             Console.WriteLine("9) Zurück");
             Console.WriteLine();
@@ -138,6 +143,27 @@ namespace Schoeppli.View
                 Console.WriteLine($"Totaler Lagerbestand: {totalLagerbestand}");
                 Console.WriteLine($"Totaler Lagerwert: {totalLagerwert / 100}.{totalLagerwert % 100}");
                 Console.WriteLine($"Für Bestand pro Artikel bitte \"Alle Artikel anzeigen\" verwenden");
+            }
+            else
+            {
+                Console.WriteLine("Keine Produkte vorhanden.");
+            }
+            Console.WriteLine();
+        }
+
+        // Anzeigen der Produkte, die einen zu niedrigen Lagerbestand aufweisen
+        public void ShowLowProducts(List<Produkt> produkte)
+        {
+            ConsoleUtils.PrintTitle();
+            if (produkte != null)
+            {
+                foreach (Produkt produkt in produkte)
+                {
+                    if (produkt.Bestand < Produkt.WarnungBestand)
+                    {
+                        Console.WriteLine(produkt.ToString());
+                    }
+                }
             }
             else
             {
