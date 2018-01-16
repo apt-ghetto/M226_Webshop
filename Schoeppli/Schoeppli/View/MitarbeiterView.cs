@@ -47,7 +47,7 @@ namespace Schoeppli.View
                     {
                         case 1:
                             ShowAll(controller.GetAllMitarbeiter());
-                            ConsoleUtils.PrintContinueMessage();
+                            ShowSingle();
                             break;
                         case 2:
                             EditStatus();
@@ -80,6 +80,34 @@ namespace Schoeppli.View
             ConsoleUtils.PrintTitle();
             mitarbeiter.ForEach(Console.WriteLine);
             Console.WriteLine();
+        }
+
+        public void ShowSingle()
+        {
+            do
+            {
+                Console.WriteLine();
+                Console.WriteLine("Mitarbeiter Details einsehen? y/n");
+                if (Console.ReadLine() == "y")
+                {
+                    Console.WriteLine();
+                    int mitarbeiterID = ConsoleUtils.GetUserInputAsInt("Mitarbeiter ID: ");
+                    Person mitarbeiter = controller.GetAllMitarbeiter().Where(i => i.ID == mitarbeiterID).Single();
+                    if (mitarbeiter != null)
+                    {
+                        Console.WriteLine(mitarbeiter.GetInfoAll());
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        PrintKeinMitarbeiter();
+                    }
+                }
+                else
+                {
+                    return;
+                }                
+            } while (true);
         }
 
         private void EditStatus()

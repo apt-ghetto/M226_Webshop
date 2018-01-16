@@ -45,7 +45,7 @@ namespace Schoeppli.View
                     {
                         case 1:
                             ShowAll(controller.GetAllKunden());
-                            ConsoleUtils.PrintContinueMessage();
+                            ShowSingle();
                             break;
                         case 2:
                             EditKunde();
@@ -75,6 +75,34 @@ namespace Schoeppli.View
             ConsoleUtils.PrintTitle();
             kunden.ForEach(Console.WriteLine);
             Console.WriteLine();
+        }
+
+        public void ShowSingle()
+        {
+            do
+            {
+                Console.WriteLine();
+                Console.WriteLine("Kundendetails einsehen? y/n");
+                if (Console.ReadLine() == "y")
+                {
+                    Console.WriteLine();
+                    int kundenID = ConsoleUtils.GetUserInputAsInt("Kunden ID: ");
+                    Person kunde = controller.GetAllKunden().Where(i => i.ID == kundenID).Single();
+                    if (kunde != null)
+                    {
+                        Console.WriteLine(kunde.GetInfoAll());
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Kunde existiert nicht!");
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            } while (true);
         }
 
         public void EditKunde()
