@@ -10,15 +10,18 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.View
 {
+    // Klasse zur Interaktion mit dem Produktmanagement
     public class ProduktView : ISubView<Produkt>
     {
         private ProduktController controller;
 
+        // Konstruktor
         public ProduktView(ProduktController controller)
         {
             this.controller = controller;
         }
 
+        // Einstiegspunkt für die Interaktion
         public void ShowView()
         {
             byte input;
@@ -65,6 +68,7 @@ namespace Schoeppli.View
             } while (input != 9);
         }
 
+        // Anzeigen des Menüs für den Benutzer
         public void ShowMenu()
         {
             Console.WriteLine("1) Alle Produkte anzeigen");
@@ -77,6 +81,7 @@ namespace Schoeppli.View
             Console.WriteLine();
         }
 
+        // Anzeigen aller Produkte
         public void ShowAll(List<Produkt> produkte)
         {
             ConsoleUtils.PrintTitle();
@@ -86,6 +91,7 @@ namespace Schoeppli.View
             }            
         }
 
+        // Anzeigen eines einzelnen Produkts
         public void ShowSingle()
         {
             do
@@ -114,6 +120,7 @@ namespace Schoeppli.View
             } while (true);
         }
 
+        // Anzeigen des Lagerbestands und des Wertes aller Produkte im Lager
         public void ShowLager(List<Produkt> produkte)
         {
             ConsoleUtils.PrintTitle();
@@ -139,6 +146,7 @@ namespace Schoeppli.View
             Console.WriteLine();
         }
 
+        // Neues Produkt erstellen
         private void NewProduct()
         {
             Produkt neuesProdukt = new Produkt();
@@ -168,6 +176,7 @@ namespace Schoeppli.View
             }
         }
 
+        // Produkt bearbeiten
         private void EditProduct(int productID)
         {
             ConsoleUtils.PrintTitle();
@@ -232,6 +241,7 @@ namespace Schoeppli.View
             }
         }
 
+        // Produkt löschen
         private void DeleteProduct(int id)
         {
             ConsoleUtils.PrintTitle();
@@ -253,6 +263,7 @@ namespace Schoeppli.View
             }
         }
 
+        // Helfermethode zur Auswahl einer Kategorie
         private Kategorie ChooseCategory()
         {
             foreach (var cat in Enum.GetValues(typeof(Kategorie)))
