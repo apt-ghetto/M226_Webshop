@@ -79,7 +79,7 @@ namespace Schoeppli.View
             
         }
 
-
+        // Anzeigen einer einzelnen Bestellung
         public void ShowSingle()
         {
             do
@@ -110,7 +110,6 @@ namespace Schoeppli.View
                 }
             } while (true);
         }
-
 
         // Anzeigen aller Bestellungen
         public void ShowAll(List<Bestellung> bestellungen)
