@@ -6,13 +6,19 @@ using System.Threading.Tasks;
 
 namespace Schoeppli.Interface
 {
-    // Interface für Klassen, welche eine View darstellen
+    /// <summary>
+    /// Interface für Klassen, welche eine View darstellen
+    /// </summary>
     public interface IView
     {
-        // Einstiegspunkt für eine View-Klasse
+        /// <summary>
+        /// Einstiegspunkt für eine View-Klasse
+        /// </summary>
         void ShowView();
 
-        // User-Menü anzeigen mit Auswahlpunkten
+        /// <summary>
+        /// User-Menü anzeigen mit Auswahlpunkten
+        /// </summary>
         void ShowMenu();
     }
 }

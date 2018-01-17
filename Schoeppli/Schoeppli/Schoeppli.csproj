@@ -80,27 +80,27 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Plunder\Testdaten\Bestellungen.json">
+    <None Include="Demo\Testdaten\Bestellungen.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Plunder\Testdaten\Kunden.json">
+    <None Include="Demo\Testdaten\Kunden.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Plunder\Testdaten\Mitarbeiter.json">
+    <None Include="Demo\Testdaten\Mitarbeiter.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Plunder\Testdaten\Produkte.json">
+    <None Include="Demo\Testdaten\Produkte.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Plunder\Testdaten\Rechnungen\2018-01-13_01-46_1_Tester.txt">
+    <Content Include="Demo\Testdaten\Rechnungen\2018-01-13_01-46_1_Tester.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Plunder\Testdaten\Rechnungen\2018-01-13_01-46_2_Obacht.txt">
+    <Content Include="Demo\Testdaten\Rechnungen\2018-01-13_01-46_2_Obacht.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Plunder\Testdaten\Rechnungen\2018-01-13_01-46_3_Klausen.txt">
+    <Content Include="Demo\Testdaten\Rechnungen\2018-01-13_01-46_3_Klausen.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

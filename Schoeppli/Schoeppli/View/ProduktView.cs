@@ -160,7 +160,7 @@ namespace Schoeppli.View
             {
                 foreach (Produkt produkt in produkte)
                 {
-                    if (produkt.Bestand < Produkt.WarnungBestand)
+                    if (produkt.Bestand <= Produkt.WarnungBestand)
                     {
                         Console.WriteLine(produkt.ToString());
                     }

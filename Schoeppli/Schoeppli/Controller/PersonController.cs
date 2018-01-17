@@ -25,7 +25,9 @@ namespace Schoeppli.Controller
             ReadData();
         }
 
-        // Daten in File schreiben
+        /// <summary>
+        /// Daten in ein File schreiben
+        /// </summary>
         public void WriteData()
         {
             DataAccess<Kunde>.WriteToFile(alleKunden, kundenFilePath);

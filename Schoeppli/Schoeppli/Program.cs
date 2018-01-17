@@ -38,12 +38,12 @@ namespace Schoeppli
         // dem Projekt selbst importiert.
         static void ImportTestData()
         {
-            foreach (string file in Directory.GetFiles(@"Plunder\Testdaten"))
+            foreach (string file in Directory.GetFiles(@"Demo\Testdaten"))
             {                
                 File.Copy(file, $@"{dbPath}/{Path.GetFileName(file)}");
             }
 
-            foreach (string file in Directory.GetFiles(@"Plunder\Testdaten\Rechnungen"))
+            foreach (string file in Directory.GetFiles(@"Demo\Testdaten\Rechnungen"))
             {
                 File.Copy(file, $@"{billPath}/{Path.GetFileName(file)}");
             }
